@@ -52,7 +52,6 @@ public abstract class User extends AbstractEntity implements UserDetails {
     private Token token;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
     private List<String> addresses = new ArrayList<>();
 
     @Column(columnDefinition = "BOOLEAN DEFAULT false")
