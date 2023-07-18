@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Badge } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-import logo from './lucienstore-logo.png'; // Replace 'logo.png' with the path to your logo image
+import logo from './lucienstore-logo.png'; 
 
 function StoreAppBar() {
   return (
@@ -16,9 +16,7 @@ function StoreAppBar() {
             <Badge badgeContent={3} color="error">
               <ShoppingCart />
             </Badge>
-          </IconButton>
-          {/* Add more navigation items, buttons, or icons as needed */}
-        </div>
+          </IconButton>        </div>
       </Toolbar>
     </AppBar>
   );

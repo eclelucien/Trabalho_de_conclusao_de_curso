@@ -3,9 +3,9 @@ import StoreAppBar from './StoreAppBar';
 import ProductCard from './component/ProductCard';
 import './App.css';
 
-
 function App() {
   const [products, setProducts] = useState([]);
+  const categories = ['Electronics', 'Clothing', 'Home Decor', 'Beauty', 'Books'];
 
   useEffect(() => {
     fetchProducts();
@@ -26,7 +26,16 @@ function App() {
       <StoreAppBar />
       <div className="welcome-container">
         <h1>Welcome to Lucien Store</h1>
-        <p>Explore our wide range of products and find great deals...</p>
+        <p>
+          Explore our wide range of products and find great deals.
+          <br />
+          Choose a category:
+        </p>
+        <ul className="categories-list">
+          {categories.map((category, index) => (
+            <li key={index}>{category}</li>
+          ))}
+        </ul>
       </div>
       <div className="product-list">
         {products.map((product) => (
