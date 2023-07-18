@@ -1,3 +1,15 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.App {
+  background-color: #DCDCDC; /* Replace with your desired shade of gray */
+}
+
 /* .App {
   text-align: center;
 }

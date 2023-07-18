@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import StoreAppBar from './StoreAppBar';
 import ProductCard from './component/ProductCard';
+import './App.css';
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -22,8 +24,10 @@ function App() {
   return (
     <div className="App">
       <StoreAppBar />
-      <h1>Welcome to Lucien Store!</h1>
-      <p>Explore our wide range of products and find great deals.</p>
+      <div className="welcome-container">
+        <h1>Welcome to Lucien Store</h1>
+        <p>Explore our wide range of products and find great deals...</p>
+      </div>
       <div className="product-list">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
