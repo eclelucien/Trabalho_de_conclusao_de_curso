@@ -1,0 +1,30 @@
+.product-card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .product-images img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .product-card h3 {
+    margin: 0;
+  }
+  
+  .product-card p {
+    margin-top: 5px;
+  }
+  
+  .product-prices {
+    margin-top: 10px;
+  }
+  
+  .product-prices p {
+    margin: 0;
+  }
+  
