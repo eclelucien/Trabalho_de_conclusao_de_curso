@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StoreAppBar from './StoreAppBar';
+import StoreAppBar from './component/StoreAppBar';
 import ProductCard from './component/ProductCard';
 import './App.css';
 
