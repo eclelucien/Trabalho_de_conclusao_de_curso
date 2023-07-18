@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Badge } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-import logo from './lucienstore-logo.png'; 
+import logo from '../assets/images/lucienstore-logo.png'; 
 
 function StoreAppBar() {
   return (
