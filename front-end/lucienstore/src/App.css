@@ -7,7 +7,7 @@
 }
 
 .App {
-  background-color: #DCDCDC; /* Replace with your desired shade of gray */
+  background-color: #DCDCDC;
 }
 
 .categories-list {
@@ -20,14 +20,14 @@
 .categories-list li {
   margin-right: 10px;
   padding: 5px 10px;
-  background-color: #ccc;
+  background-color: rgb(9, 111, 170);
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .categories-list li:hover {
-  background-color: #999;
+  background-color: rgb(103, 162, 196);
 }
 /* .App {
   text-align: center;
