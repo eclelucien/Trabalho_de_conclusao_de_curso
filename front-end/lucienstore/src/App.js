@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StoreAppBar from './component/StoreAppBar';
 import ProductCard from './component/ProductCard';
+import OptionsList from './component/OptionsList'; // Import the OptionsList component
 import './App.css';
 
 function App() {
@@ -35,10 +36,23 @@ function App() {
           ))}
         </ul>
       </div>
-      <div className="product-list">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      <Carousel showArrows={true} showThumbs={false}>
+          {/* Replace the URLs below with your actual image URLs */}
+          <div>
+            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/10/1688960268466f26d41b9e612de630272752d840d2_thumbnail_2000x.webp" alt="Image 1" />
+          </div>
+          <div>
+            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/10/1688960268466f26d41b9e612de630272752d840d2_thumbnail_2000x.webp" alt="Image 2" />
+          </div>
+          {/* Add more images as needed */}
+        </Carousel>
+      <div className="flex-container">
+        <OptionsList />
+        <div className="product-list">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );

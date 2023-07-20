@@ -1,0 +1,31 @@
+.options-list {
+    width: 13%;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: rgb(202, 189, 189);
+  }
+  
+  .options-list h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: rgb(10, 1, 1);
+  }
+  
+  .options-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .options-list li {
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: rgb(51, 60, 184);
+    font-size: 18px;
+  }
+  
+  .options-list li:hover {
+    color: #009688;
+  }
+  

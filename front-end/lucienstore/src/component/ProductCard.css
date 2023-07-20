@@ -1,12 +1,5 @@
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 .product-card {
-  width: 250px;
+  width: 230px;
   margin: 10px;
   padding: 10px;
   border: 1px solid #ccc;
