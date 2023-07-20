@@ -3,6 +3,8 @@ import StoreAppBar from './component/StoreAppBar';
 import ProductCard from './component/ProductCard';
 import OptionsList from './component/OptionsList'; // Import the OptionsList component
 import './App.css';
+import { Carousel } from 'react-responsive-carousel'; // Import the Carousel component
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -36,16 +38,18 @@ function App() {
           ))}
         </ul>
       </div>
-      <Carousel showArrows={true} showThumbs={false}>
-          {/* Replace the URLs below with your actual image URLs */}
+      <Carousel showArrows={true} showThumbs={false} interval={3000}>
           <div>
-            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/10/1688960268466f26d41b9e612de630272752d840d2_thumbnail_2000x.webp" alt="Image 1" />
+            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/17/16895783130a5b4a7ee74d58ae920e7a8a8f80c6d7_thumbnail_2000x.webp" alt="ImageSlide 2" />
           </div>
           <div>
-            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/10/1688960268466f26d41b9e612de630272752d840d2_thumbnail_2000x.webp" alt="Image 2" />
+            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/10/1688960268466f26d41b9e612de630272752d840d2_thumbnail_2000x.webp" alt="ImageSlide 1" />
           </div>
-          {/* Add more images as needed */}
+          <div>
+            <img src="https://img.ltwebstatic.com/images3_ccc/2023/07/17/16895783130a5b4a7ee74d58ae920e7a8a8f80c6d7_thumbnail_2000x.webp" alt="ImageSlide 2" />
+          </div>
         </Carousel>
+        <br/>
       <div className="flex-container">
         <OptionsList />
         <div className="product-list">

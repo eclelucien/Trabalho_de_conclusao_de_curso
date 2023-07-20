@@ -44,3 +44,13 @@
   justify-content: flex-start; /* Start the content from the left side of the container */
 }
 
+.carousel-container {
+  max-width: 600px; /* Set the maximum width for the carousel container */
+  margin: 0 auto; /* Center the carousel horizontally */
+}
+
+/* Optionally, you can style the images within the carousel */
+.carousel-container img {
+  max-width: 100%;
+  height: auto;
+}
