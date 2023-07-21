@@ -52,10 +52,6 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<String> findById(@PathVariable Long userId) {
-        return new ResponseEntity<>("", HttpStatus.OK);
-    }
 
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{userId}")

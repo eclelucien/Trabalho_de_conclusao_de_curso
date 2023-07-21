@@ -40,5 +40,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable avec l'ID spécifié."));
+    }
+
     
 }
