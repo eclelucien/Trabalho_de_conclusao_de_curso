@@ -1,30 +1,43 @@
 package com.eclesiastelucien.com.lucienstore.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.eclesiastelucien.com.lucienstore.dtos.ApiResponse;
 import com.eclesiastelucien.com.lucienstore.dtos.AuthenticationResponse;
 import com.eclesiastelucien.com.lucienstore.dtos.UserRequest;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.eclesiastelucien.com.lucienstore.models.User;
+import com.eclesiastelucien.com.lucienstore.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "users", description = "CRUD REST APIs for user of type administrator or buyer - Create User, Update User, Get User, Get All users, Delete User")
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/users")
 public class UserController {
 
-    @SecurityRequirement(name = "bearerAuth")
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping
-    @ApiResponse(responseCode = "201")
     public ResponseEntity<AuthenticationResponse> create(@RequestBody UserRequest userRequest) {
-        return new ResponseEntity<>( new AuthenticationResponse(), HttpStatus.CREATED);
+        User newUser = new User();
+        // Définir les propriétés de newUser à partir de userRequest
+        newUser.setName(userRequest.getName());
+        newUser.setEmail(userRequest.getEmail());
+        newUser.setPhoneNumber(userRequest.getPhoneNumber());
+        newUser.setPassword(userRequest.getPassword());
+
+        User createdUser = userService.createUser(newUser);
+        // Vous pouvez ajouter des détails supplémentaires à la réponse, si nécessaire
+        AuthenticationResponse response = new AuthenticationResponse();
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping
