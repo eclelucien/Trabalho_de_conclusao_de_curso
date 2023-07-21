@@ -2,6 +2,11 @@ package com.eclesiastelucien.com.lucienstore.models;
 
 import jakarta.persistence.Column;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
@@ -21,7 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class User extends AbstractEntity implements UserDetails {
+public  class User extends AbstractEntity implements UserDetails {
 
     @NotNull
     @Column(nullable = false)
@@ -33,6 +38,12 @@ public abstract class User extends AbstractEntity implements UserDetails {
     private String email;
 
     private String phoneNumber;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // In this example, we'll assign a simple role to all users. You can adjust this as per your role system.
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+    }
 
     @JsonIgnore
     @Column(nullable = false)

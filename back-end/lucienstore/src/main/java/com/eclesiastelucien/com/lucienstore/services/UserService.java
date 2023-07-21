@@ -2,7 +2,6 @@ package com.eclesiastelucien.com.lucienstore.services;
 
 import com.eclesiastelucien.com.lucienstore.models.User;
 import com.eclesiastelucien.com.lucienstore.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -56,6 +54,10 @@ public class UserService {
         // Autres propriétés que vous souhaitez mettre à jour
 
         return userRepository.save(user);
+    }
+
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 
     
