@@ -52,10 +52,12 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-
-    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{userId}")
-    public ResponseEntity<String> findAll(@PathVariable Long userId) {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<User> update(@PathVariable Long userId, @RequestBody User updatedUser) {
+        User user = userService.updateUser(userId, updatedUser);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+
+    
 }

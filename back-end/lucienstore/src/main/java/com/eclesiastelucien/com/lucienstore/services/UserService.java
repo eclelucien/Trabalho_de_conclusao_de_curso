@@ -45,5 +45,18 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable avec l'ID spécifié."));
     }
 
+    public User updateUser(Long userId, User updatedUser) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable avec l'ID spécifié."));
+
+        // Mettre à jour les propriétés de l'utilisateur
+        user.setName(updatedUser.getName());
+        user.setEmail(updatedUser.getEmail());
+        user.setPhoneNumber(updatedUser.getPhoneNumber());
+        // Autres propriétés que vous souhaitez mettre à jour
+
+        return userRepository.save(user);
+    }
+
     
 }
