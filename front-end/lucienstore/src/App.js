@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import StoreAppBar from './component/StoreAppBar';
 import ProductCard from './component/ProductCard';
-import OptionsList from './component/OptionsList'; // Import the OptionsList component
+import OptionsList from './component/OptionsList'; 
 import './App.css';
-import { Carousel } from 'react-responsive-carousel'; // Import the Carousel component
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
+import { Carousel } from 'react-responsive-carousel'; 
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 function App() {
   const [products, setProducts] = useState([]);
