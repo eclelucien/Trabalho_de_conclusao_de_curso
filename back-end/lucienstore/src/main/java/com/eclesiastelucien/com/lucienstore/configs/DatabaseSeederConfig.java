@@ -1,15 +1,12 @@
 package com.eclesiastelucien.com.lucienstore.configs;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
 import com.eclesiastelucien.com.lucienstore.models.User;
 import com.eclesiastelucien.com.lucienstore.repositories.UserRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Configuration
