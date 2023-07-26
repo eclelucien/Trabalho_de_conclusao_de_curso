@@ -1,7 +1,10 @@
 package com.eclesiastelucien.com.lucienstore.services;
 
+import com.eclesiastelucien.com.lucienstore.dtos.UserRequest;
 import com.eclesiastelucien.com.lucienstore.models.User;
 import com.eclesiastelucien.com.lucienstore.repositories.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,28 +13,28 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User createUser(User user) {
-        // Vérifier si l'utilisateur existe déjà dans la base de données
-        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+    public User createUser(UserRequest userRequest) {
+        User newUser = new User();
+        newUser.setName(userRequest.getName());
+        newUser.setEmail(userRequest.getEmail());
+        newUser.setPhoneNumber(userRequest.getPhoneNumber());
+        newUser.setPassword(userRequest.getPassword());        Optional<User> existingUser = userRepository.findByEmail(newUser.getEmail());
         if (existingUser.isPresent()) {
             throw new IllegalArgumentException("Un utilisateur avec cet e-mail existe déjà.");
         }
-
-        // Hasher le mot de passe avant de l'enregistrer dans la base de données
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-
-        // Enregistrer l'utilisateur dans la base de données
-        return userRepository.save(user);
+        String hashedPassword = passwordEncoder.encode(newUser.getPassword());
+        newUser.setPassword(hashedPassword);
+        return userRepository.save(newUser);
     }
 
     public List<User> getAllUsers() {

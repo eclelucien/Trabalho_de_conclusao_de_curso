@@ -18,26 +18,13 @@ import java.util.List;
 @RequestMapping("api/v1/users")
 public class UserController {
 
-    private final UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private  UserService userService;
 
     @PostMapping
-    public ResponseEntity<AuthenticationResponse> create(@RequestBody UserRequest userRequest) {
-        User newUser = new User();
-        // Définir les propriétés de newUser à partir de userRequest
-        newUser.setName(userRequest.getName());
-        newUser.setEmail(userRequest.getEmail());
-        newUser.setPhoneNumber(userRequest.getPhoneNumber());
-        newUser.setPassword(userRequest.getPassword());
-
-        User createdUser = userService.createUser(newUser);
-        // Vous pouvez ajouter des détails supplémentaires à la réponse, si nécessaire
-        AuthenticationResponse response = new AuthenticationResponse();
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ResponseEntity<User> create(@RequestBody UserRequest userRequest) {
+        User createdUser = userService.createUser(userRequest);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping
