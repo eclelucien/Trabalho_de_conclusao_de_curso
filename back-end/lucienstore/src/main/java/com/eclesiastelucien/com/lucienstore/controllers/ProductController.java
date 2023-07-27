@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eclesiastelucien.com.lucienstore.dtos.ProductDetailResponse;
 import com.eclesiastelucien.com.lucienstore.dtos.ProductResponse;
+import com.eclesiastelucien.com.lucienstore.models.product.ProductSearchResponse;
 import com.eclesiastelucien.com.lucienstore.services.ProductService;
 
 import java.util.List;
@@ -33,14 +35,14 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<ProductResponse> productDetail(@PathVariable Long productId) {
-        ProductResponse productDetail = new ProductResponse();
+    public ResponseEntity<ProductDetailResponse> productDetail(@PathVariable Long productId) {
+        ProductDetailResponse productDetail = new ProductDetailResponse(this.productService.findById(productId));
         return new ResponseEntity<>(productDetail, HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ProductResponse>> productSearch(@RequestParam String query) {
-        List<ProductResponse> searchResults = productService.productSearch(query);
+    public ResponseEntity<List<ProductSearchResponse>> productSearch(@RequestParam String query) {
+        List<ProductSearchResponse> searchResults = productService.productSearch(query);
 
         return new ResponseEntity<>(searchResults, HttpStatus.OK);
     }
