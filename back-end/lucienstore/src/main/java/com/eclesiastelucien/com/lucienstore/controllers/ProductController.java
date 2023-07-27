@@ -23,14 +23,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // @GetMapping
-    // public ResponseEntity<List<ProductResponse>> findAll(
-    //         @RequestParam(value = "page", defaultValue = "0") int page,
-    //         @RequestParam(value = "limit", defaultValue = "30") int limit) {
-    //     List<ProductResponse> productsDto = new ProductResponse()
-    //             .toFormattedList(this.productService.findAll(page, limit));
-    //     return new ResponseEntity<>(productsDto, HttpStatus.OK);
-    // }
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> findAll(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "limit", defaultValue = "30") int limit) {
+        List<ProductResponse> productsDto = new ProductResponse()
+                .toFormattedList(this.productService.findAll(page, limit));
+        return new ResponseEntity<>(productsDto, HttpStatus.OK);
+    }
 
     @GetMapping("/{productId}")
     public ResponseEntity<ProductResponse> productDetail(@PathVariable Long productId) {
@@ -38,11 +38,11 @@ public class ProductController {
         return new ResponseEntity<>(productDetail, HttpStatus.OK);
     }
 
-    // @GetMapping("/search")
-    // public ResponseEntity<List<ProductResponse>> productSearch(@RequestParam String query) {
-    //     List<ProductResponse> searchResults = productService.productSearch(query);
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> productSearch(@RequestParam String query) {
+        List<ProductResponse> searchResults = productService.productSearch(query);
 
-    //     return new ResponseEntity<>(searchResults, HttpStatus.OK);
-    // }
+        return new ResponseEntity<>(searchResults, HttpStatus.OK);
+    }
 }
 
