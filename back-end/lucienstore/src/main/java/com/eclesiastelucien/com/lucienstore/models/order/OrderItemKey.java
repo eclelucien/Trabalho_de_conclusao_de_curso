@@ -2,7 +2,7 @@ package com.eclesiastelucien.com.lucienstore.models.order;
 
 import java.io.Serializable;
 
-import com.eclesiastelucien.com.lucienstore.models.Product;
+import com.eclesiastelucien.com.lucienstore.models.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;

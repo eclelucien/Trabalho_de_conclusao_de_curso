@@ -1,4 +1,4 @@
-package com.eclesiastelucien.com.lucienstore.models;
+package com.eclesiastelucien.com.lucienstore.models.product;
 
 
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import com.eclesiastelucien.com.lucienstore.models.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

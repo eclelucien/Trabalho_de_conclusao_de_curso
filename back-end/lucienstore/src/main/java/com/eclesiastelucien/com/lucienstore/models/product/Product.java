@@ -1,4 +1,4 @@
-package com.eclesiastelucien.com.lucienstore.models;
+package com.eclesiastelucien.com.lucienstore.models.product;
 
 
 import java.time.LocalDate;
@@ -7,14 +7,13 @@ import java.util.Set;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import com.eclesiastelucien.com.lucienstore.models.AbstractEntity;
+import com.eclesiastelucien.com.lucienstore.models.User;
 import com.eclesiastelucien.com.lucienstore.models.order.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

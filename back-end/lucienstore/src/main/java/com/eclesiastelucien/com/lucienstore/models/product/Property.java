@@ -1,4 +1,4 @@
-package com.eclesiastelucien.com.lucienstore.models;
+package com.eclesiastelucien.com.lucienstore.models.product;
 
 import java.io.Serializable;
 
