@@ -1,4 +1,4 @@
-package com.eclesiastelucien.com.lucienstore.dtos;
+package com.eclesiastelucien.com.lucienstore.dtos.price;
 
 
 import com.eclesiastelucien.com.lucienstore.models.product.Product;

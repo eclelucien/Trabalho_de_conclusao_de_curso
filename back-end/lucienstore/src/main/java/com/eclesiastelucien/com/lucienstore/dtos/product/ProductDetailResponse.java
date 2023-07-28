@@ -1,4 +1,4 @@
-package com.eclesiastelucien.com.lucienstore.dtos;
+package com.eclesiastelucien.com.lucienstore.dtos.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import com.eclesiastelucien.com.lucienstore.models.product.Category;
 import com.eclesiastelucien.com.lucienstore.models.product.Product;
 import com.eclesiastelucien.com.lucienstore.models.product.Property;

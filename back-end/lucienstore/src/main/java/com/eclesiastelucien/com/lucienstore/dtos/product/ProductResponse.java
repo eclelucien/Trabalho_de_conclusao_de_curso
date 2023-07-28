@@ -1,6 +1,8 @@
-package com.eclesiastelucien.com.lucienstore.dtos;
+package com.eclesiastelucien.com.lucienstore.dtos.product;
 
 
+import com.eclesiastelucien.com.lucienstore.dtos.price.FormattedPrice;
+import com.eclesiastelucien.com.lucienstore.dtos.price.PriceResponse;
 import com.eclesiastelucien.com.lucienstore.models.product.Product;
 import com.eclesiastelucien.com.lucienstore.models.product.Property;
 import com.eclesiastelucien.com.lucienstore.utils.Helper;

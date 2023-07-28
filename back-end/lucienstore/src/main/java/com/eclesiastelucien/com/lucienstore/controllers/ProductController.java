@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eclesiastelucien.com.lucienstore.dtos.ProductDetailResponse;
-import com.eclesiastelucien.com.lucienstore.dtos.ProductResponse;
+import com.eclesiastelucien.com.lucienstore.dtos.product.ProductDetailResponse;
+import com.eclesiastelucien.com.lucienstore.dtos.product.ProductResponse;
 import com.eclesiastelucien.com.lucienstore.models.product.ProductSearchResponse;
 import com.eclesiastelucien.com.lucienstore.services.ProductService;
 
