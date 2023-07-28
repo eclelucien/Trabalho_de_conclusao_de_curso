@@ -3,14 +3,19 @@ package com.eclesiastelucien.com.lucienstore.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eclesiastelucien.com.lucienstore.dtos.product.ProductDetailResponse;
+import com.eclesiastelucien.com.lucienstore.dtos.product.ProductRequest;
 import com.eclesiastelucien.com.lucienstore.dtos.product.ProductResponse;
+import com.eclesiastelucien.com.lucienstore.models.product.Product;
 import com.eclesiastelucien.com.lucienstore.models.product.ProductSearchResponse;
 import com.eclesiastelucien.com.lucienstore.services.ProductService;
 
@@ -46,5 +51,29 @@ public class ProductController {
 
         return new ResponseEntity<>(searchResults, HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
+        Product createdProduct = productService.createProduct(productRequest);
+
+        ProductResponse createdProductResponse = new ProductResponse(createdProduct);
+        return new ResponseEntity<>(createdProductResponse, HttpStatus.CREATED);
+    }
+
+ 
+    @PutMapping("/{productId}")
+    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long productId, @RequestBody ProductRequest productRequest) {
+        Product updatedProduct = productService.updateProduct(productId, productRequest);
+
+        ProductResponse updatedProductResponse = new ProductResponse(updatedProduct);
+        return new ResponseEntity<>(updatedProductResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
+        productService.deleteProduct(productId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
 

@@ -6,7 +6,6 @@ import com.eclesiastelucien.com.lucienstore.dtos.price.PriceResponse;
 import com.eclesiastelucien.com.lucienstore.models.product.Product;
 import com.eclesiastelucien.com.lucienstore.models.product.Property;
 import com.eclesiastelucien.com.lucienstore.utils.Helper;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
