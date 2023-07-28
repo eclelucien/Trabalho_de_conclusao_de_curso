@@ -7,6 +7,7 @@ import org.apache.catalina.authenticator.jaspic.PersistentProviderRegistrations.
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import com.eclesiastelucien.com.lucienstore.enums.OrderItemStatus;
 import com.eclesiastelucien.com.lucienstore.models.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.lang.NonNull;

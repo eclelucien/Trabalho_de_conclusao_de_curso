@@ -1,4 +1,4 @@
-package com.eclesiastelucien.com.lucienstore.models.order;
+package com.eclesiastelucien.com.lucienstore.enums;
 
 public enum OrderItemStatus {
     WAITING_PAYMENT,
