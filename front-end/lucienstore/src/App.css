@@ -46,10 +46,9 @@
 
 .carousel-container {
   max-width: 600px; 
-  margin: 0 auto; /* Center the carousel horizontally */
+  margin: 0 auto;
 }
 
-/* Optionally, you can style the images within the carousel */
 .carousel-container img {
   max-width: 100%;
   height: auto;
