@@ -40,12 +40,12 @@
 
 .flex-container {
   display: flex;
-  flex-wrap: wrap; /* Wrap the content if there's not enough space horizontally */
-  justify-content: flex-start; /* Start the content from the left side of the container */
+  flex-wrap: wrap;
+  justify-content: flex-start; 
 }
 
 .carousel-container {
-  max-width: 600px; /* Set the maximum width for the carousel container */
+  max-width: 600px; 
   margin: 0 auto; /* Center the carousel horizontally */
 }
 
