@@ -9,5 +9,4 @@ public class LucienstoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LucienstoreApplication.class, args);
 	}
-
 }
