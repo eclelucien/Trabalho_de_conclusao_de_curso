@@ -10,13 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "products", description = "CRUD REST APIs - Create Product, Update Product, Get Product, Get All products, Delete Product")
+
+@Tag(name = "users", description = "CRUD REST APIs - Create User, Update User, Get User, Get All users, Delete User")
 @RestController
 @RequestMapping("api/v1/users")
 public class UserController {
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @PostMapping
     public ResponseEntity<User> create(@RequestBody UserRequest userRequest) {
