@@ -21,6 +21,9 @@ jobs:
         with:
           java-version: '17'
 
+      - name: Navigate to Backend Directory
+        run: cd backend/lucienstore
+
       - name: Build with Maven
         run: mvn clean install
 
@@ -51,3 +54,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_380D6A3BA38F4BCFADD7613BD435F368 }}
           package: '*.jar'
+
