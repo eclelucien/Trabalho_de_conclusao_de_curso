@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.aspectj.weaver.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eclesiastelucien.com.lucienstore.commons.dtos.ApiResponse;
+import com.eclesiastelucien.com.lucienstore.commons.utils.Utils;
 import com.eclesiastelucien.com.lucienstore.modules.category.dtos.requests.CategoryRequest;
 import com.eclesiastelucien.com.lucienstore.modules.category.dtos.responses.CategoryResponse;
 import com.eclesiastelucien.com.lucienstore.modules.category.models.Category;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -43,11 +42,10 @@ public class CategoryController {
 
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    @ApiResponse(responseCode = "201")
     public ResponseEntity<ApiResponse> create(@RequestPart("categoryRequest") String categoryJson,
             @NotNull @RequestPart("file") MultipartFile file) throws IOException {
         this.categoryServiceImpl.create(Utils.parseJson(categoryJson, CategoryRequest.class), file);
-        return new ResponseEntity<>(new ApiResponse(), HttpStatus.CREATED);
+        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Category created"), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -71,13 +69,14 @@ public class CategoryController {
     public ResponseEntity<ApiResponse> update(@PathVariable @Min(1) Long categoryId,
             @RequestBody CategoryRequest categoryRequestDto) {
         this.categoryServiceImpl.update(categoryId, categoryRequestDto);
-        return new ResponseEntity<>(new ApiResponse(), HttpStatus.OK);
+        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Category updated"), HttpStatus.CREATED);
+
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<ApiResponse> delete(@PathVariable @Min(1) Long categoryId) {
         this.categoryServiceImpl.remove(categoryId);
-        return new ResponseEntity<>(new ApiResponse(), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Category deleted"), HttpStatus.CREATED);
     }
 }

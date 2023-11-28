@@ -1,5 +1,6 @@
 package com.eclesiastelucien.com.lucienstore.modules.user.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,10 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.eclesiastelucien.com.lucienstore.commons.models.AbstractEntity;
 import com.eclesiastelucien.com.lucienstore.commons.models.Token;
+import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
 import com.eclesiastelucien.com.lucienstore.modules.user.enums.UserRoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -42,6 +45,10 @@ public class User extends AbstractEntity implements UserDetails {
     private String email;
 
     private String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.REMOVE)
+    private List<Order> orders = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

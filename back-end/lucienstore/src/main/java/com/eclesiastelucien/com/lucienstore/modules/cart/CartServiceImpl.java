@@ -11,6 +11,7 @@ import com.eclesiastelucien.com.lucienstore.modules.cart.dtos.responses.CartResp
 import com.eclesiastelucien.com.lucienstore.modules.cart.models.CartCost;
 import com.eclesiastelucien.com.lucienstore.modules.cart.models.SubTotal;
 import com.eclesiastelucien.com.lucienstore.modules.order.OrderRepository;
+import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderStatus;
 import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderStatusEnum;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItem;
@@ -62,7 +63,7 @@ public class CartServiceImpl extends BaseServiceImpl implements CartService {
         if (cartOrders.isEmpty()) {
             cartOrder = new Order();
             cartOrder.setCreatedAt(LocalDateTime.now());
-            cartOrder.setStatus(OrderStatusEnum.IN_CART);
+            cartOrder.setStatus(OrderStatus.IN_CART);
             cartOrder.setBuyer(user);
             cartOrder = orderRepository.save(cartOrder);
         } else {

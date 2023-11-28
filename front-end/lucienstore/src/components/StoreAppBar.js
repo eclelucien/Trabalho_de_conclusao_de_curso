@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Badge } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-import logo from '../assets/images/lucienstore-logo.png'; 
+import logo from '../assets/images/lucienstore-logo.png';
 
 function StoreAppBar() {
   return (
@@ -9,7 +9,7 @@ function StoreAppBar() {
       <Toolbar>
         <img src={logo} alt="Logo" style={{ height: '40px', marginRight: '10px' }} />
         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-          LucienStore
+          Lucien Store
         </Typography>
         <div style={{ marginLeft: 'auto' }}>
           <IconButton color="inherit">
