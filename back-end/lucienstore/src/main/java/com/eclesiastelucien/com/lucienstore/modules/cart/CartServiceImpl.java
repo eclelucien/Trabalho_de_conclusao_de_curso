@@ -3,10 +3,14 @@ package com.eclesiastelucien.com.lucienstore.modules.cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eclesiastelucien.com.lucienstore.commons.exceptions.ResourceNotFoundException;
 import com.eclesiastelucien.com.lucienstore.commons.utils.BaseServiceImpl;
+import com.eclesiastelucien.com.lucienstore.commons.utils.Utils;
 import com.eclesiastelucien.com.lucienstore.modules.cart.dtos.requests.CartRequest;
 import com.eclesiastelucien.com.lucienstore.modules.cart.dtos.responses.CartResponse;
 import com.eclesiastelucien.com.lucienstore.modules.cart.models.CartCost;
+import com.eclesiastelucien.com.lucienstore.modules.cart.models.SubTotal;
+import com.eclesiastelucien.com.lucienstore.modules.order.OrderRepository;
 import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderStatusEnum;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItem;
@@ -14,6 +18,7 @@ import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.OrderItemRep
 import com.eclesiastelucien.com.lucienstore.modules.product.ProductService;
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Product;
 import com.eclesiastelucien.com.lucienstore.modules.shipment.ShipmentServiceImpl;
+import com.eclesiastelucien.com.lucienstore.modules.shipment.models.Shipment;
 import com.eclesiastelucien.com.lucienstore.modules.user.UserRepository;
 import com.eclesiastelucien.com.lucienstore.modules.user.models.User;
 import java.util.List;

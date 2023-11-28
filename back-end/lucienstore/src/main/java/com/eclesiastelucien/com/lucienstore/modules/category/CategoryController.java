@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eclesiastelucien.com.lucienstore.modules.category.dtos.requests.CategoryRequest;
+import com.eclesiastelucien.com.lucienstore.modules.category.dtos.responses.CategoryResponse;
+import com.eclesiastelucien.com.lucienstore.modules.category.models.Category;
 
 import org.springframework.web.bind.annotation.RequestBody;
 

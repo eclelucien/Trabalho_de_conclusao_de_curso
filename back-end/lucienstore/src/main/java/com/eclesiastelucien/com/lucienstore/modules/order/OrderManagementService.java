@@ -3,6 +3,7 @@ package com.eclesiastelucien.com.lucienstore.modules.order;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.eclesiastelucien.com.lucienstore.modules.order.dtos.OrderResponse;
 import com.eclesiastelucien.com.lucienstore.modules.user.models.User;
 
 public interface OrderManagementService {
