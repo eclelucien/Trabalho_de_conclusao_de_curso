@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import com.eclesiastelucien.com.lucienstore.models.User;
-import com.eclesiastelucien.com.lucienstore.repositories.UserRepository;
+
+import com.eclesiastelucien.com.lucienstore.modules.user.UserRepository;
+import com.eclesiastelucien.com.lucienstore.modules.user.models.User;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -20,15 +22,15 @@ public class DatabaseSeederConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<User> users = userRepository.findAll();
-        if(users.isEmpty()) {
+        if (users.isEmpty()) {
             for (int i = 0; i < 5; i++) {
                 User user = new User();
                 user.setName("Teste 1");
                 user.setEmail("emailteste@gmail.com");
                 user.setPhoneNumber("123456");
-                if(i > 2){
+                if (i > 2) {
                     user.setActive(true);
-                }else{
+                } else {
                     user.setActive(false);
                 }
                 users.add(user);

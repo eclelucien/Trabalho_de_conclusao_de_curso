@@ -1,7 +1,5 @@
 package com.eclesiastelucien.com.lucienstore.configs.jwt;
 
-
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +9,7 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.eclesiastelucien.com.lucienstore.models.User;
+import com.eclesiastelucien.com.lucienstore.modules.user.models.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

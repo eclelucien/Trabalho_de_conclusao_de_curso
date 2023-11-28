@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.eclesiastelucien.com.lucienstore.exceptions.ForbiddenResourceException;
-import com.eclesiastelucien.com.lucienstore.repositories.UserRepository;
+import com.eclesiastelucien.com.lucienstore.commons.exceptions.ForbiddenResourceException;
+import com.eclesiastelucien.com.lucienstore.modules.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

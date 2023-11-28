@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.eclesiastelucien.com.lucienstore.exceptions.ForbiddenResourceException;
+
+import com.eclesiastelucien.com.lucienstore.commons.exceptions.ForbiddenResourceException;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,4 +67,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   }
 
 }
-
