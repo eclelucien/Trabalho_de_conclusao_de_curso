@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eclesiastelucien.com.lucienstore.commons.dtos.ApiResponse;
 import com.eclesiastelucien.com.lucienstore.modules.order.dtos.OrderResponse;
 import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderItemStatus;
-import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItem;
 import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.enums.OrderItemStatusEnum;
+import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.models.OrderItem;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class OrderController {
     public ResponseEntity<OrderItem> updateOrderItemStatusEnum(
             @PathVariable Long orderItemId,
             @RequestParam Long orderId,
-            @RequestParam OrderItemStatus newStatus) {
+            @RequestParam OrderItemStatusEnum newStatus) {
         OrderItem updatedOrderItem = orderServiceImpl.updateOrderItemStatusEnum(orderItemId, orderId, newStatus);
         return ResponseEntity.ok(updatedOrderItem);
     }

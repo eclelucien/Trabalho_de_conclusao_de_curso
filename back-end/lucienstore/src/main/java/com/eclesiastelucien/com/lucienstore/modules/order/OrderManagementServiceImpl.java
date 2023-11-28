@@ -21,9 +21,9 @@ import com.eclesiastelucien.com.lucienstore.modules.order.dtos.OrderResponse;
 import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderItemStatus;
 import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderStatus;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
-import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItem;
 import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.OrderItemRepository;
 import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.enums.OrderItemStatusEnum;
+import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.models.OrderItem;
 import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.responses.OrderItemResponse;
 import com.eclesiastelucien.com.lucienstore.modules.product.ProductService;
 import com.eclesiastelucien.com.lucienstore.modules.product.dtos.ProductDetailResponse;
@@ -207,13 +207,13 @@ public class OrderManagementServiceImpl extends BaseServiceImpl implements Order
 
     private void updateOrderStatus(Order order) {
         boolean allShipped = order.getItems().stream()
-                .allMatch(item -> item.getStatus() == OrderItemStatus.SHIPPED);
+                .allMatch(item -> item.getStatus() == OrderItemStatusEnum.SHIPPED);
         boolean allDelivered = order.getItems().stream()
-                .allMatch(item -> item.getStatus() == OrderItemStatus.DELIVERED);
+                .allMatch(item -> item.getStatus() == OrderItemStatusEnum.DELIVERED);
         boolean allProcessing = order.getItems().stream()
-                .allMatch(item -> item.getStatus() == OrderItemStatus.PROCESSING);
+                .allMatch(item -> item.getStatus() == OrderItemStatusEnum.PROCESSING);
         boolean allCancelled = order.getItems().stream()
-                .allMatch(item -> item.getStatus() == OrderItemStatus.CANCELLED);
+                .allMatch(item -> item.getStatus() == OrderItemStatusEnum.CANCELLED);
         if (allShipped) {
             order.setStatus(OrderStatus.SHIPPED);
         } else if (allDelivered) {
@@ -226,7 +226,7 @@ public class OrderManagementServiceImpl extends BaseServiceImpl implements Order
         orderRepository.save(order);
     }
 
-    public OrderItem updateOrderItemStatusEnum(Long productId, Long orderId, OrderItemStatus newStatus) {
+    public OrderItem updateOrderItemStatusEnum(Long productId, Long orderId, OrderItemStatusEnum newStatus) {
         User connectedUser = this.authenticatedUser();
 
         List<OrderItemStatusEnum> unauthorizedStatuses = List.of(OrderItemStatusEnum.CANCELLED,

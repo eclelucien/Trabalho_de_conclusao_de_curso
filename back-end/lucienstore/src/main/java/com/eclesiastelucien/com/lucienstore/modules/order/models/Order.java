@@ -2,6 +2,7 @@ package com.eclesiastelucien.com.lucienstore.modules.order.models;
 
 import com.eclesiastelucien.com.lucienstore.commons.models.AbstractEntity;
 import com.eclesiastelucien.com.lucienstore.modules.order.enums.OrderStatus;
+import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.models.OrderItem;
 import com.eclesiastelucien.com.lucienstore.modules.user.models.User;
 
 import java.util.HashSet;

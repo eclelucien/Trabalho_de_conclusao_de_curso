@@ -9,7 +9,7 @@ import org.apache.catalina.authenticator.jaspic.PersistentProviderRegistrations.
 import com.eclesiastelucien.com.lucienstore.commons.utils.Utils;
 import com.eclesiastelucien.com.lucienstore.modules.cart.models.SubTotal;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
-import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItem;
+import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.models.OrderItem;
 import com.eclesiastelucien.com.lucienstore.modules.shipment.ShipmentServiceImpl;
 import com.eclesiastelucien.com.lucienstore.modules.shipment.dtos.responses.ShipmentResponse;
 

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
-import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItem;
+import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.models.OrderItem;
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Product;
 
 import java.util.Optional;

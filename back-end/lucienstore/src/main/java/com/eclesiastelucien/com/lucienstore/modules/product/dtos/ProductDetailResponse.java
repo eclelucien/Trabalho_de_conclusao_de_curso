@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.eclesiastelucien.com.lucienstore.modules.product.models.Category;
+import com.eclesiastelucien.com.lucienstore.modules.category.models.Category;
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Product;
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Property;
 

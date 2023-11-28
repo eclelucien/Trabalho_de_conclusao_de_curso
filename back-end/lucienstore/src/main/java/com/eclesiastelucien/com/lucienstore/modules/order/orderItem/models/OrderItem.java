@@ -7,7 +7,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
-import com.eclesiastelucien.com.lucienstore.modules.order.models.OrderItemKey;
+import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.OrderItemKey;
 import com.eclesiastelucien.com.lucienstore.modules.order.orderItem.enums.OrderItemStatusEnum;
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
