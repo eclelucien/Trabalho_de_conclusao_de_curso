@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Badge } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 import logo from '../assets/images/lucienstore-logo.png';
+import '../App.css';
 
 function StoreAppBar() {
   return (

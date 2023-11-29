@@ -1,5 +1,7 @@
 import React from 'react';
 import './OptionsList.css';
+import '../App.css';
+
 
 const OptionsList = () => {
   const options = ['News', 'Tendency', 'In high', 'Promotion', 'Promotion', 'Promotion', 'Promotion'];
