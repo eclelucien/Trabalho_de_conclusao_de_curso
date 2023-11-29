@@ -1,19 +1,28 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Home from './pages/Home'
-import Erro from './pages/Erro'
 
-import Header from './components/Header'
+import React from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import StoreAppBar from './components/StoreAppBar';
+import Login from './components/Login/Login';
+import Home from './components/Home';
+import CreateUser from './components/CreateUser/CreateUser'
+import { useAuth } from './context/AuthContext';
+
+
 
 function RoutesApp() {
+    const categories = ['Electronics', 'Clothing', 'Home Decor', 'Beauty', 'Books'];
+    const { user } = useAuth();
     return (
         <BrowserRouter>
-            <Header />
+            <StoreAppBar />
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route
+                    path="/"
+                    element={user ? <Home categories={categories} /> : <Navigate to="/login" />}
+                />
+                <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
                 <Route path='/create-user' element={<CreateUser />} />
-                <Route path='/favoritos' element={<Login />} />
-                <Route path='*' element={<Erro />} />
             </Routes>
         </BrowserRouter>
     )
