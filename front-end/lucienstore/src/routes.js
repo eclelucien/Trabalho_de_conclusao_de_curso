@@ -15,7 +15,6 @@ function RoutesApp() {
     const { user } = useAuth();
     return (
         <BrowserRouter>
-            <StoreAppBar />
             <Routes>
                 <Route
                     path="/"

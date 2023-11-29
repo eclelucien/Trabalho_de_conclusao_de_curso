@@ -84,7 +84,7 @@ const Login = () => {
             </form>
 
             <div className="create-user-button">
-                <Link to="/create-user">Create User</Link>
+                <Link to="/create-user">Sign up</Link>
             </div>
         </div>
     );

@@ -4,10 +4,13 @@ import WelcomeContainer from './WelcomeContainer';
 import ImageCarousel from './Carousel/ImageCarousel';
 import OptionsList from './OptionList/OptionsList';
 import ProductList from './ProductList/ProductList';
+import StoreAppBar from './StoreAppBar';
+
 
 const Home = ({ categories }) => {
     return (
         <div>
+            <StoreAppBar />
             <WelcomeContainer categories={categories} />
             <ImageCarousel />
             <br />
