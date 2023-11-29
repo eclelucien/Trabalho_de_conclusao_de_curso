@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import api from './../services/api';
+import api from '../../services/api';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import ProductCard from '../components/ProductCard';
-import '../App.css';
+import ProductCard from '../ProductCard/ProductCard';
+import '../../App.css';
 
 
 function ProductList() {
