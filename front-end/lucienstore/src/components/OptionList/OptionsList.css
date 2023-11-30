@@ -9,7 +9,8 @@
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 24px;
-  color: rgb(9, 111, 170);
+  /* color: rgb(9, 111, 170); */
+  color: rgb(34, 29, 29);
 }
 
 .options-list-ul {
@@ -34,7 +35,7 @@
 }
 
 .options-list .separator {
-  color: grey;
+  color: rgb(34, 29, 29);
   margin: 0 5px;
 }
 

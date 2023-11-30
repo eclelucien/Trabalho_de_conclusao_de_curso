@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// baseURL: 'https://api.themoviedb.org/3/'
-// URL: /movie/now_playing?api_key=your_api_key&language=pt-BR
+// baseURL: 'https://lucienstore.azurewebsites.net/api/v1/'
+// URL: https://lucienstore.azurewebsites.net/api/v1/
 
 const api = axios.create({
     baseURL: 'https://fakestoreapi.com/products'
