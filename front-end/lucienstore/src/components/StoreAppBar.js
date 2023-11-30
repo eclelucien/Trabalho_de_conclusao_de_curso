@@ -17,7 +17,8 @@ function StoreAppBar() {
             <Badge badgeContent={3} color="error">
               <ShoppingCart />
             </Badge>
-          </IconButton>        </div>
+          </IconButton>
+        </div>
       </Toolbar>
     </AppBar>
   );

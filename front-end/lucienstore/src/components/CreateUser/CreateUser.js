@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import '../Login/Login.css';
+import './CreateUser.css';
 
 
 const CreateUser = () => {
@@ -35,6 +35,8 @@ const CreateUser = () => {
 
     const renderForm = (
         <div className="form">
+            <div className="title-message">Welcome to Lucien Store! 😀</div>
+
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
                     <label>Username </label>
@@ -61,7 +63,7 @@ const CreateUser = () => {
     );
 
     return (
-        <div className="app">
+        <div className="loginApp">
             <div className="login-form">
                 <div className="title">Sign In</div>
                 {isSubmitted ? <div>User is successfully logged in</div> : renderForm}

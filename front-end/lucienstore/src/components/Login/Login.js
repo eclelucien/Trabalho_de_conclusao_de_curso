@@ -68,6 +68,8 @@ const Login = () => {
     const renderForm = (
         <div className="form">
             <form onSubmit={handleSubmit}>
+                <div className="title-message">We missed you, welcome back! 😀</div>
+
                 <div className="input-container">
                     <label>Username </label>
                     <input type="text" name="uname" required />
@@ -84,15 +86,15 @@ const Login = () => {
             </form>
 
             <div className="create-user-button">
-                <Link to="/create-user">Sign up</Link>
+                <Link to="/create-user">Don't have an account yet?  Sign Up</Link>
             </div>
         </div>
     );
 
     return (
-        <div className="app">
+        <div className="loginApp">
             <div className="login-form">
-                <div className="title">Sign In</div>
+                <div className="title">Login</div>
                 {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
             </div>
         </div>
