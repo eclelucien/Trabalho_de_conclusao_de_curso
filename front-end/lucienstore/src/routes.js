@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import StoreAppBar from './components/StoreAppBar';
 import Login from './components/Login/Login';
 import Home from './components/Home';
 import CreateUser from './components/CreateUser/CreateUser'
