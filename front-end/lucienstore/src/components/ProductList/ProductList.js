@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from '../ProductCard/ProductCard';
 import '../../App.css';
 
-
 function ProductList() {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);

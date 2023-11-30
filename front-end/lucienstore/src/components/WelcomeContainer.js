@@ -1,8 +1,10 @@
 import React from 'react';
+
 import '../App.css';
 
 
 function WelcomeContainer({ categories }) {
+
     return (
         <div className="welcome-container">
             <h1>Welcome to Lucien Store</h1>
