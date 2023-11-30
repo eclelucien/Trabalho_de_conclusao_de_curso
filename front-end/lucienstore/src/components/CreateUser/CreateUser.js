@@ -27,9 +27,8 @@ const CreateUser = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your user creation logic here
-        // Assuming successful user creation, set user data and log in
-        const userData = { /* user data from user creation */ };
+
+        const userData = {};
         login(userData);
     };
 

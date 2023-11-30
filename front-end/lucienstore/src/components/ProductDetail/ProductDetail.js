@@ -1,4 +1,3 @@
-// ProductDetail.js
 
 import React from 'react';
 import './ProductDetail.css';
@@ -8,7 +7,7 @@ import StoreAppBar from '../StoreAppBar';
 
 const ProductDetail = () => {
     const { id } = useParams();
-    const product = /* Your logic to fetch the product based on the id */ {};
+    const product = {};
 
     return (
 
@@ -23,7 +22,6 @@ const ProductDetail = () => {
                 <p>Price: $2564.45</p>
                 <p>Description: Test desc</p>
                 <p>Rating: 2 33 reviews</p>
-                {/* Add any additional information you want to display */}
             </div>
         </div>
     );

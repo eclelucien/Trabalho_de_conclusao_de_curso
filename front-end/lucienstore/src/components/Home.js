@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import WelcomeContainer from './WelcomeContainer';
 import ImageCarousel from './Carousel/ImageCarousel';
 import OptionsList from './OptionList/OptionsList';
-import ProductList from './ProductList/ProductList';
 import StoreAppBar from './StoreAppBar';
 import Footer from './Footer/Footer';
 import api from './../services/api';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductListWrapper from './ProductList/ProductListWrapper';
 
 
@@ -21,7 +19,6 @@ const Home = ({ categories }) => {
         try {
             const response = await api.get("", {
                 params: {
-                    // Add your API parameters here
                     page: pageNum,
                 },
             });
@@ -30,13 +27,10 @@ const Home = ({ categories }) => {
 
             const newProducts = response.data;
 
-            // Ensure newProducts is an array before spreading
             if (Array.isArray(newProducts)) {
-                // Append the new products to the existing list
                 setProducts((prevProducts) => [...prevProducts, ...newProducts]);
 
                 if (newProducts.length === 0) {
-                    // No more products available
                     setHasMore(false);
                 }
             } else {

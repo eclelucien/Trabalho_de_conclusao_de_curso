@@ -1,4 +1,3 @@
-// OptionList.js
 
 import React from 'react';
 import './OptionsList.css';

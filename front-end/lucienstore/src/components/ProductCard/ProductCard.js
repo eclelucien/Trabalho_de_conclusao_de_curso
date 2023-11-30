@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import '../../App.css';
 
 const ProductCard = ({ product }) => {
-  const maxLength = 100; // Set your desired maximum length for the description
+  const maxLength = 100;
 
-  // Function to truncate long descriptions
   const truncateDescription = (text) => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   };

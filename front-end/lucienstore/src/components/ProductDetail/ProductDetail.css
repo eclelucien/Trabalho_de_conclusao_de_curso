@@ -1,5 +1,3 @@
-/* ProductDetail.css */
-
 .product-detail {
     display: flex;
     justify-content: center;
@@ -15,13 +13,11 @@
 
 img {
     max-width: 100%;
-    /* Ensures the image doesn't exceed its container's width */
     height: auto;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px;
     max-height: 400px;
-    /* Set a maximum height for the image if needed */
 }
 
 h2 {

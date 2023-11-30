@@ -17,7 +17,6 @@ const Login = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
-        // Redirect to home page when isSubmitted is true
         if (isSubmitted) {
             navigate('/');
         }
@@ -52,28 +51,21 @@ const Login = () => {
     };
 
     const handleSubmit = (event) => {
-        // Prevent page reload
         event.preventDefault();
 
         var { uname, pass } = document.forms[0];
 
-        // Find user login info
         const userData = database.find((user) => user.username === uname.value);
 
-        // Compare user info
         if (userData) {
             if (userData.password !== pass.value) {
-                // Invalid password
                 setErrorMessages({ name: "pass", message: errors.pass });
             } else {
-                // Call the login function with user data
                 login(userData);
 
-                // Set the isSubmitted state to true
                 setIsSubmitted(true);
             }
         } else {
-            // Username not found
             setErrorMessages({ name: "uname", message: errors.uname });
         }
     };
