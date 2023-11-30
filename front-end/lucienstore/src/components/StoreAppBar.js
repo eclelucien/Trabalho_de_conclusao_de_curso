@@ -45,7 +45,7 @@ function StoreAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: 'blue' }}>
       <Toolbar>
         <img src={logo} alt="Logo" style={{ height: '40px', marginRight: '10px' }} />
         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>

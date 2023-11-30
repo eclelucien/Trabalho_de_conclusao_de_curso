@@ -34,7 +34,7 @@ const CreateUser = () => {
 
     const renderForm = (
         <div className="form">
-            <div className="title-message">Welcome to Lucien Store! 😀</div>
+            <div className="title-message">Welcome to the Lucien Store family! 😀</div>
 
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
@@ -53,7 +53,14 @@ const CreateUser = () => {
                     {renderErrorMessage("pass")}
                 </div>
                 <div className="button-container">
-                    <input type="submit" />
+                    <input
+                        type="submit"
+                        value="Submit"
+                        style={{
+                            backgroundColor: 'blue',
+                            color: 'white',
+                        }}
+                    />
                 </div>
             </form>
 

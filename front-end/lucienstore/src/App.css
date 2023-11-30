@@ -25,14 +25,14 @@
 .categories-list li {
   margin-right: 10px;
   padding: 5px 10px;
-  background-color: rgb(9, 111, 170);
+  background-color: blue;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .categories-list li:hover {
-  background-color: rgb(103, 162, 196);
+  background-color: rgb(81, 81, 204);
 }
 
 .product-list {

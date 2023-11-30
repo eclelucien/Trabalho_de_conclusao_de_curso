@@ -86,12 +86,19 @@ const Login = () => {
                     {renderErrorMessage("pass")}
                 </div>
                 <div className="button-container">
-                    <input type="submit" />
+                    <input
+                        type="submit"
+                        value="Login"
+                        style={{
+                            backgroundColor: 'blue',
+                            color: 'white',
+                        }}
+                    />
                 </div>
             </form>
 
             <div className="create-user-button">
-                <Link to="/create-user">Don't have an account yet?  Sign Up</Link>
+                <Link to="/create-user" className="signup-link">Don't have an account yet?  Sign Up</Link>
             </div>
         </div>
     );

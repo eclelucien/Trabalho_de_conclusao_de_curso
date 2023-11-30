@@ -23,14 +23,14 @@ input[type="submit"] {
     margin-top: 10px;
     cursor: pointer;
     font-size: 15px;
-    background: #01d28e;
-    border: 1px solid #01d28e;
+    background: #0132d2;
+    border: 1px solid #0132d2;
     color: #fff;
     padding: 10px 20px;
 }
 
 input[type="submit"]:hover {
-    background: #6cf0c2;
+    background: #5377f0;
 }
 
 .button-container {
@@ -72,9 +72,18 @@ input[type="submit"]:hover {
     justify-content: center;
     font-size: 19px;
     margin-bottom: 20px;
-    color: rgb(9, 111, 170);
+    color: blue;
 }
 
+.signup-link {
+    color: blue;
+    background-color: transparent;
+}
+
+.signup-link:hover {
+    color: grey;
+    background-color: transparent;
+}
 
 .input-container {
     display: flex;
