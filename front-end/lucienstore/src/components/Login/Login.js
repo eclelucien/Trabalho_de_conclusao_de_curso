@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Login.css';
 
-
 const Login = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
+
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
+
+    useEffect(() => {
+        // Redirect to home page when isSubmitted is true
+        if (isSubmitted) {
+            navigate('/');
+        }
+    }, [isSubmitted, navigate]);
 
     const handleChange = (e) => {
         setFormData({
@@ -36,14 +45,13 @@ const Login = () => {
         }
     ];
 
-
     const errors = {
         uname: "invalid username",
         pass: "invalid password"
     };
 
     const handleSubmit = (event) => {
-        //Prevent page reload
+        // Prevent page reload
         event.preventDefault();
 
         var { uname, pass } = document.forms[0];
@@ -57,6 +65,10 @@ const Login = () => {
                 // Invalid password
                 setErrorMessages({ name: "pass", message: errors.pass });
             } else {
+                // Call the login function with user data
+                login(userData);
+
+                // Set the isSubmitted state to true
                 setIsSubmitted(true);
             }
         } else {
