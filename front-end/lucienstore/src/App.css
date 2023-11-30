@@ -6,6 +6,10 @@
   margin-bottom: 20px;
 }
 
+.welcome-container h1 {
+  color: rgb(9, 111, 170)
+}
+
 .App {
   background-color: #DCDCDC;
 }
@@ -32,20 +36,20 @@
 
 .product-list {
   width: 84%;
-  display: flex; 
+  display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  /* align-items: center;  */
+  align-items: center;
 }
 
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
 .carousel-container {
-  max-width: 600px; 
+  max-width: 600px;
   margin: 0 auto;
 }
 

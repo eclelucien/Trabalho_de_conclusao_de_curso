@@ -4,8 +4,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from '../ProductCard/ProductCard';
 import '../../App.css';
 
-function ProductList() {
-    const [products, setProducts] = useState([]);
+function ProductList({ initialProducts }) {
+    const [products, setProducts] = useState(initialProducts || []);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -54,24 +54,17 @@ function ProductList() {
     if (loading) {
         return (
             <div className='loading'>
-                <h2>Loading products...</h2>
+                <h2 style={{ color: 'blue', textAlign: 'center' }}>Loading products...</h2>
             </div>
         );
     }
 
     return (
-        <InfiniteScroll
-            dataLength={products.length}
-            next={fetchMoreData}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-        >
-            <div className="product-list">
-                {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-            </div>
-        </InfiniteScroll>
+        <div className="product-list">
+            {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+            ))}
+        </div>
     );
 }
 

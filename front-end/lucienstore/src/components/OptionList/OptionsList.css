@@ -1,38 +1,63 @@
+/* OptionList.css */
+
 .options-list {
   width: 100%;
-  /* Adjust the width as needed */
-  margin-left: 20px;
   padding: 10px;
-  background-color: rgb(202, 189, 189);
+  background-color: rgb(211, 203, 203);
   text-align: center;
-  /* Center the entire options list */
 }
 
 .options-list h2 {
   margin-top: 0;
   margin-bottom: 10px;
-  font-size: 18px;
-  color: rgb(10, 1, 1);
+  font-size: 22px;
+  color: rgb(9, 111, 170);
 }
 
-.options-list ul {
+.options-list-ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  /* Use flexbox to display items horizontally */
   justify-content: center;
   /* Center the items horizontally */
 }
 
 .options-list li {
   margin-right: 10px;
-  /* Adjust spacing between items as needed */
   cursor: pointer;
-  color: rgb(51, 60, 184);
-  font-size: 18px;
+  color: rgb(9, 111, 170);
+  font-size: 20px;
 }
 
 .options-list li:hover {
-  color: #009688;
+  color: white;
+}
+
+.options-list .separator {
+  color: grey;
+  margin: 0 5px;
+}
+
+
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+  .options-list-ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .options-list li {
+    margin: 5px 0;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .options-list-ul {
+    flex-wrap: wrap;
+  }
+
+  .options-list li {
+    margin: 5px;
+  }
 }

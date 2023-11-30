@@ -1,8 +1,8 @@
-import React from 'react';
+// OptionList.js
 
+import React from 'react';
 import './OptionsList.css';
 import '../../App.css';
-
 
 const OptionsList = () => {
   const options = [
@@ -18,15 +18,17 @@ const OptionsList = () => {
     'Limited Stock',
     'Popular Categories',
     'Customer Favorites',
-
   ];
 
   return (
     <div className="options-list">
-      <h2>Options</h2>
-      <ul>
+      <h2>What are you looking for?</h2>
+      <ul className="options-list-ul">
         {options.map((option, index) => (
-          <li key={index}>{option}</li>
+          <li key={index}>
+            {option}
+            {index !== options.length - 1 && <span className="separator"> | </span>}
+          </li>
         ))}
       </ul>
     </div>

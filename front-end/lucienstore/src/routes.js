@@ -20,7 +20,6 @@ function RoutesApp() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/create-user" element={<CreateUser />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
-                {/* Add more routes as needed */}
             </Routes>
         </BrowserRouter>
     )
