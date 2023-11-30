@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home';
 import CreateUser from './components/CreateUser/CreateUser'
 import { useAuth } from './context/AuthContext';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 
 
 
@@ -18,6 +19,7 @@ function RoutesApp() {
                 <Route path="/" element={<Home categories={categories} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/create-user" element={<CreateUser />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
                 {/* Add more routes as needed */}
             </Routes>
         </BrowserRouter>

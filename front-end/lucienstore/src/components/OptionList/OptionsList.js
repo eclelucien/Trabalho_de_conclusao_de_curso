@@ -5,7 +5,21 @@ import '../../App.css';
 
 
 const OptionsList = () => {
-  const options = ['News', 'Tendency', 'In high', 'Promotion', 'Promotion', 'Promotion', 'Promotion'];
+  const options = [
+    'New Arrivals',
+    'Best Sellers',
+    'Clearance',
+    'Featured Products',
+    'Top Rated',
+    'On Sale',
+    'Seasonal Offers',
+    'Recommended',
+    'Exclusive Deals',
+    'Limited Stock',
+    'Popular Categories',
+    'Customer Favorites',
+
+  ];
 
   return (
     <div className="options-list">

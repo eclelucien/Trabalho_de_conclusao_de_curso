@@ -1,31 +1,38 @@
 .options-list {
-    width: 13%;
-    margin-left: 20px;
-    padding: 10px;
-    background-color: rgb(202, 189, 189);
-  }
-  
-  .options-list h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: rgb(10, 1, 1);
-  }
-  
-  .options-list ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .options-list li {
-    margin-bottom: 5px;
-    cursor: pointer;
-    color: rgb(51, 60, 184);
-    font-size: 18px;
-  }
-  
-  .options-list li:hover {
-    color: #009688;
-  }
-  
+  width: 100%;
+  /* Adjust the width as needed */
+  margin-left: 20px;
+  padding: 10px;
+  background-color: rgb(202, 189, 189);
+  text-align: center;
+  /* Center the entire options list */
+}
+
+.options-list h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: rgb(10, 1, 1);
+}
+
+.options-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* Use flexbox to display items horizontally */
+  justify-content: center;
+  /* Center the items horizontally */
+}
+
+.options-list li {
+  margin-right: 10px;
+  /* Adjust spacing between items as needed */
+  cursor: pointer;
+  color: rgb(51, 60, 184);
+  font-size: 18px;
+}
+
+.options-list li:hover {
+  color: #009688;
+}

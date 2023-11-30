@@ -4,7 +4,7 @@ import axios from 'axios';
 // URL: /movie/now_playing?api_key=your_api_key&language=pt-BR
 
 const api = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/photos'
+    baseURL: 'https://fakestoreapi.com/products'
 })
 
 //https://lucienstore.azurewebsites.net/api/v1/
