@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import './CreateUser.css';
 
-
 const CreateUser = () => {
     const { login } = useAuth();
     const [formData, setFormData] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
     });
@@ -25,11 +24,29 @@ const CreateUser = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const userData = {};
-        login(userData);
+        try {
+            const response = await fetch('https://lucienstore.azurewebsites.net/api/v1/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const userData = await response.json();
+                login(userData);
+                setIsSubmitted(true);
+            } else {
+                const errorData = await response.json();
+                setErrorMessages({ name: 'submit', message: errorData.message });
+            }
+        } catch (error) {
+            console.error('Error submitting the form:', error);
+        }
     };
 
     const renderForm = (
@@ -38,7 +55,7 @@ const CreateUser = () => {
 
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
-                    <label>Username </label>
+                    <label>Name </label>
                     <input type="text" name="uname" required />
                     {renderErrorMessage("uname")}
                 </div>
@@ -71,7 +88,7 @@ const CreateUser = () => {
     return (
         <div className="loginApp">
             <div className="login-form">
-                <div className="title">Sign In</div>
+                <div className="title">Sign Up</div>
                 {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
             </div>
         </div>
