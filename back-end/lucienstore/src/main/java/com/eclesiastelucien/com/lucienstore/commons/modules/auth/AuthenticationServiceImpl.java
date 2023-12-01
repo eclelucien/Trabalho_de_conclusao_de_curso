@@ -114,7 +114,10 @@ public class AuthenticationServiceImpl extends BaseServiceImpl implements Authen
     }
 
     private void updateToken(String token, User user) {
-        user.setToken(Token.builder().accessToken(token).build());
+        // Truncate or hash the token value if necessary
+        String truncatedToken = (token.length() > 255) ? token.substring(0, 255) : token;
+
+        user.setToken(Token.builder().accessToken(truncatedToken).build());
         this.userRepository.save(user);
     }
 
