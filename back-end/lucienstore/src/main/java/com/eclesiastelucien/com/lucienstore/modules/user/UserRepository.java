@@ -11,4 +11,7 @@ import com.eclesiastelucien.com.lucienstore.modules.user.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByResetPasswordToken(String resetToken);
+
 }

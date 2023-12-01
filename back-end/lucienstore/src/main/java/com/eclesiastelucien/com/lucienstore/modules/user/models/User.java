@@ -2,6 +2,8 @@ package com.eclesiastelucien.com.lucienstore.modules.user.models;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -72,6 +74,12 @@ public class User extends AbstractEntity implements UserDetails {
 
     @JsonIgnore
     private Token token;
+
+    @JsonIgnore
+    private String resetPasswordToken;
+
+    @JsonIgnore
+    private LocalDateTime resetPasswordTokenExpiry;
 
     @JsonIgnore
     private List<String> addresses = new ArrayList<>();
