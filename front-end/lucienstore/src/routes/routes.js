@@ -8,6 +8,7 @@ import CreateUser from '../components/CreateUser/CreateUser'
 import { useAuth } from '../context/AuthContext';
 import ProductDetail from '../components/ProductDetail/ProductDetail';
 import Admin from '../components/Admin/Admin';
+import Profile from '../components/Profile/Profile';
 
 
 
@@ -21,6 +22,7 @@ function RoutesApp() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/create-user" element={<CreateUser />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/profile" element={<Profile />} />
 
                 {/* Add the route for the Admin component */}
                 <Route path="/admin" element={<Admin />} />
