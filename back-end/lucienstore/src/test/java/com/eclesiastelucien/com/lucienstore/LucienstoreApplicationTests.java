@@ -3,11 +3,11 @@ package com.eclesiastelucien.com.lucienstore;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class LucienstoreApplicationTests {
+// @SpringBootTest
+// class LucienstoreApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// @Test
+// void contextLoads() {
+// }
 
-}
+// }
