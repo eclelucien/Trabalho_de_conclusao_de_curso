@@ -1,0 +1,15 @@
+.dashboard-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.dashboard-body {
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F2F5;
+}

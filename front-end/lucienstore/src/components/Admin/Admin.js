@@ -49,7 +49,7 @@ const Admin = () => {
 
     const fetchData = async (endpoint, stateKey) => {
         try {
-            const response = await axios.get(`https://lucienstore.azurewebsites.net/api/v1/${endpoint}`);
+            const response = await axios.get(`http://localhost:8080/api/v1/${endpoint}`);
             if (stateKey === 'users') {
                 setUsers(response.data);
             } else if (stateKey === 'categories') {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import './Login.css';
+import axios from 'axios';
 
+import './Login.css';
 
 const Login = () => {
     const { login } = useAuth();
@@ -29,46 +30,30 @@ const Login = () => {
         });
     };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const { email, password } = formData;
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/auth/login', {
+                email,
+                password,
+            });
+
+            const userData = response.data;
+            login(userData);
+            setIsSubmitted(true);
+        } catch (error) {
+            console.error('Error during login:', error);
+            setErrorMessages({ name: "email", message: "Invalid email or password" });
+        }
+    };
+
     const renderErrorMessage = (name) =>
         name === errorMessages.name && (
             <div className="error">{errorMessages.message}</div>
         );
-
-    const database = [
-        {
-            username: "user1",
-            password: "pass1"
-        },
-        {
-            username: "user2",
-            password: "pass2"
-        }
-    ];
-
-    const errors = {
-        uname: "invalid username",
-        pass: "invalid password"
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        var { uname, pass } = document.forms[0];
-
-        const userData = database.find((user) => user.username === uname.value);
-
-        if (userData) {
-            if (userData.password !== pass.value) {
-                setErrorMessages({ name: "pass", message: errors.pass });
-            } else {
-                login(userData);
-
-                setIsSubmitted(true);
-            }
-        } else {
-            setErrorMessages({ name: "uname", message: errors.uname });
-        }
-    };
 
     const renderForm = (
         <div className="form">
@@ -76,14 +61,14 @@ const Login = () => {
                 <div className="title-message">We missed you, welcome back! 😀</div>
 
                 <div className="input-container">
-                    <label>Username </label>
-                    <input type="text" name="uname" required />
-                    {renderErrorMessage("uname")}
+                    <label>Email </label>
+                    <input type="text" name="email" value={formData.email} onChange={handleChange} required />
+                    {renderErrorMessage("email")}
                 </div>
                 <div className="input-container">
                     <label>Password </label>
-                    <input type="password" name="pass" required />
-                    {renderErrorMessage("pass")}
+                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                    {renderErrorMessage("password")}
                 </div>
                 <div className="button-container">
                     <input
@@ -98,7 +83,7 @@ const Login = () => {
             </form>
 
             <div className="create-user-button">
-                <Link to="/create-user" className="signup-link">Don't have an account yet?  Sign Up</Link>
+                <Link to="/create-user" className="signup-link">Don't have an account yet? Sign Up</Link>
             </div>
         </div>
     );

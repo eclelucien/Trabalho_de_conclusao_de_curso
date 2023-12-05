@@ -9,6 +9,11 @@ import { useAuth } from '../context/AuthContext';
 import ProductDetail from '../components/ProductDetail/ProductDetail';
 import Admin from '../components/Admin/Admin';
 import Profile from '../components/Profile/Profile';
+import Admin2 from '../components/Admin2/Admin2';
+import Orders from '../components/Orders';
+import Categories from '../components/Categories';
+import Users from '../components/Users';
+import Products from '../components/Products';
 
 
 
@@ -24,8 +29,14 @@ function RoutesApp() {
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/profile" element={<Profile />} />
 
-                {/* Add the route for the Admin component */}
+                {/*  Admin routes */}
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/admin2" element={<Admin2 />} />
+                <Route path="/orders" element={< Orders />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/users" element={<Users />} />
+
 
 
             </Routes>
