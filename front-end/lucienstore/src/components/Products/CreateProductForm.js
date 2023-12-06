@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import './EditUserForm.css';
 
-const EditUserForm = ({ onSubmit, onCancel, initialData }) => {
-    const [userData, setUserData] = useState(initialData);
+const CreateProductForm = ({ onSubmit, onCancel }) => {
+    const [productData, setProductData] = useState({
+        name: '',
+        description: '',
+        // Add other initial values as needed
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserData((prevData) => ({
+        setProductData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
@@ -14,17 +17,17 @@ const EditUserForm = ({ onSubmit, onCancel, initialData }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(userData);
+        onSubmit(productData);
     };
 
     return (
-        <form className="edit-user-form" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <label>
                 Name:
                 <input
                     type="text"
                     name="name"
-                    value={userData.name}
+                    value={productData.name}
                     onChange={handleChange}
                 />
             </label>
@@ -34,21 +37,18 @@ const EditUserForm = ({ onSubmit, onCancel, initialData }) => {
                 <input
                     type="text"
                     name="email"
-                    value={userData.email}
+                    value={productData.description}
                     onChange={handleChange}
                 />
             </label>
             <br />
-            <div className="button-container">
-                <button type="submit" className="save-button">
-                    Save
-                </button>
-                <button type="button" onClick={onCancel} className="cancel-button">
-                    Cancel
-                </button>
-            </div>
+            {/* Add other fields as needed */}
+            <button type="submit">Create</button>
+            <button type="button" onClick={onCancel}>
+                Cancel
+            </button>
         </form>
     );
 };
 
-export default EditUserForm;
+export default CreateProductForm;

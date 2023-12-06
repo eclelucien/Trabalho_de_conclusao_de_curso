@@ -1,51 +1,131 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import DashboardHeader from '../DashboardHeader';
-
-import all_orders from '../constants/orders';
-import { calculateRange, sliceData } from '../../utils/table-pagination';
-
+import { calculateRange } from '../../utils/table-pagination';
 import './styles.css';
-import DoneIcon from '../../assets/icons/done.svg';
-import CancelIcon from '../../assets/icons/cancel.svg';
-import RefundedIcon from '../../assets/icons/refunded.svg';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Modal from 'react-modal';
+import EditIcon from '../../assets/icons/icons8-edit.svg';
+import DeleteIcon from '../../assets/icons/icons8-delete.svg';
+import EditProductForm from './EditProductForm';
+import CreateProductForm from './CreateProductForm';
+
+Modal.setAppElement('#root');
+
 
 function Products() {
     const [search, setSearch] = useState('');
-    const [orders, setOrders] = useState(all_orders);
+    const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [pagination, setPagination] = useState([]);
+    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+    const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
+    const [initialProductData, setInitialProductData] = useState(null);
+
 
     useEffect(() => {
-        setPagination(calculateRange(all_orders, 5));
-        setOrders(sliceData(all_orders, page, 5));
+        fetchData();
     }, []);
 
-    // Search
-    const __handleSearch = (event) => {
-        setSearch(event.target.value);
-        if (event.target.value !== '') {
-            let search_results = orders.filter((item) =>
-                item.first_name.toLowerCase().includes(search.toLowerCase()) ||
-                item.last_name.toLowerCase().includes(search.toLowerCase()) ||
-                item.product.toLowerCase().includes(search.toLowerCase())
-            );
-            setOrders(search_results);
-        }
-        else {
-            __handleChangePage(1);
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/v1/products');
+            setProducts(response.data);
+            setPagination(calculateRange(response.data, 5));
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
     };
 
-    // Change Page 
-    const __handleChangePage = (new_page) => {
-        setPage(new_page);
-        setOrders(sliceData(all_orders, new_page, 5));
-    }
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+        if (event.target.value !== '') {
+            let searchResults = products.filter((product) =>
+                product.name.toLowerCase().includes(search.toLowerCase()) ||
+                product.description.toLowerCase().includes(search.toLowerCase())
+            );
+            setProducts(searchResults);
+        } else {
+            handleChangePage(1);
+        }
+    };
+
+    const handleChangePage = (newPage) => {
+        setPage(newPage);
+    };
+
+
+    const openEditModal = (productId) => {
+        const selectedProduct = products.find(product => product.id === productId);
+
+        setSelectedProductId(productId);
+        setEditModalIsOpen(true);
+        setInitialProductData(selectedProduct);
+    };
+
+    const closeEditModal = () => {
+        setEditModalIsOpen(false);
+        setSelectedProductId(null);
+    };
+
+    const openCreateModal = () => {
+        setCreateModalIsOpen(true);
+    };
+
+    const closeCreateModal = () => {
+        setCreateModalIsOpen(false);
+    };
+
+    const handleEditProduct = async (updatedProductData) => {
+        try {
+            await axios.put(`http://localhost:8080/api/v1/products/${selectedProductId}`, updatedProductData);
+            fetchData();
+            closeEditModal();
+
+            toast.success('Product updated successfully');
+        } catch (error) {
+            console.error('Error updating product:', error);
+
+            toast.error('Error updating product');
+        }
+    };
+
+    const handleDeleteProduct = async (productId) => {
+        try {
+            await axios.delete(`http://localhost:8080/api/v1/products/${productId}`);
+            fetchData();
+
+            toast.success('Product deleted successfully');
+        } catch (error) {
+            console.error('Error deleting product:', error);
+
+            toast.error('Error deleting product');
+        }
+    };
+
+    const handleCreateProduct = async (newProductData) => {
+        try {
+            await axios.post('http://localhost:8080/api/v1/products', newProductData);
+            fetchData();
+            closeCreateModal();
+
+            toast.success('Product created successfully');
+        } catch (error) {
+            console.error('Error creating product:', error);
+
+            toast.error('Error creating product');
+        }
+    };
+
+
+
 
     return (
         <div className='dashboard-content'>
-            <DashboardHeader
-                btnText="New Product" />
+            <DashboardHeader btnText="New Product" onClick={() => openCreateModal()} />
+
 
             <div className='dashboard-content-container'>
                 <div className='dashboard-content-header'>
@@ -56,83 +136,118 @@ function Products() {
                             value={search}
                             placeholder='Search..'
                             className='dashboard-content-input'
-                            onChange={e => __handleSearch(e)} />
+                            onChange={(e) => handleSearch(e)}
+                        />
                     </div>
                 </div>
 
                 <table>
                     <thead>
-                        <th>ID</th>
-                        <th>DATE</th>
-                        <th>STATUS</th>
-                        <th>COSTUMER</th>
-                        <th>PRODUCT</th>
-                        <th>REVENUE</th>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
 
-                    {orders.length !== 0 ?
+                    {products.length !== 0 ? (
                         <tbody>
-                            {orders.map((order, index) => (
-                                <tr key={index}>
-                                    <td><span>{order.id}</span></td>
-                                    <td><span>{order.date}</span></td>
-                                    <td>
-                                        <div>
-                                            {order.status === 'Paid' ?
+                            {products.map((product, index) => (
+                                <React.Fragment key={index}>
+                                    <tr>
+                                        <td>
+                                            <span>{product.id}</span>
+                                        </td>
+                                        <td>
+                                            <span>{product.name}</span>
+                                        </td>
+                                        <td>
+                                            <span>{product.description}</span>
+                                        </td>
+                                        <td>
+                                            <div>
                                                 <img
-                                                    src={DoneIcon}
-                                                    alt='paid-icon'
-                                                    className='dashboard-content-icon' />
-                                                : order.status === 'Canceled' ?
-                                                    <img
-                                                        src={CancelIcon}
-                                                        alt='canceled-icon'
-                                                        className='dashboard-content-icon' />
-                                                    : order.status === 'Refunded' ?
-                                                        <img
-                                                            src={RefundedIcon}
-                                                            alt='refunded-icon'
-                                                            className='dashboard-content-icon' />
-                                                        : null}
-                                            <span>{order.status}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <img
-                                                src={order.avatar}
-                                                className='dashboard-content-avatar'
-                                                alt={order.first_name + ' ' + order.last_name} />
-                                            <span>{order.first_name} {order.last_name}</span>
-                                        </div>
-                                    </td>
-                                    <td><span>{order.product}</span></td>
-                                    <td><span>${order.price}</span></td>
-                                </tr>
+                                                    src={EditIcon}
+                                                    alt='edit-icon'
+                                                    className='dashboard-content-icon'
+                                                    onClick={() => openEditModal(product.id)}
+                                                />
+                                                <img
+                                                    src={DeleteIcon}
+                                                    alt='delete-icon'
+                                                    className='dashboard-content-icon'
+                                                    onClick={() => handleDeleteProduct(product.id)}
+                                                />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="3">
+                                        </td>
+                                    </tr>
+                                </React.Fragment>
                             ))}
                         </tbody>
-                        : null}
+                    ) : null}
                 </table>
-
-                {orders.length !== 0 ?
+                {products.length !== 0 ? (
                     <div className='dashboard-content-footer'>
                         {pagination.map((item, index) => (
                             <span
                                 key={index}
                                 className={item === page ? 'active-pagination' : 'pagination'}
-                                onClick={() => __handleChangePage(item)}>
+                                onClick={() => handleChangePage(item)}
+                            >
                                 {item}
                             </span>
                         ))}
                     </div>
-                    :
+                ) : (
                     <div className='dashboard-content-footer'>
                         <span className='empty-table'>No data</span>
                     </div>
-                }
+                )}
+                <Modal
+                    isOpen={editModalIsOpen}
+                    onRequestClose={closeEditModal}
+                    contentLabel='Edit Product Modal'
+                    style={{
+                        content: {
+                            backgroundColor: '#DCDCDC',
+                            maxWidth: '400px',
+                            margin: 'auto',
+                        },
+                    }}
+                >
+                    <EditProductForm
+                        onSubmit={handleEditProduct}
+                        onCancel={closeEditModal}
+                        initialData={initialProductData}
+
+                    />
+                </Modal>
+
+                <Modal
+                    isOpen={createModalIsOpen}
+                    onRequestClose={closeCreateModal}
+                    contentLabel='Create Product Modal'
+                    style={{
+                        content: {
+                            backgroundColor: '#DCDCDC',
+                            maxWidth: '400px',
+                            margin: 'auto',
+                        },
+                    }}
+                >
+                    <CreateProductForm
+                        onSubmit={handleCreateProduct}
+                        onCancel={closeCreateModal}
+                    />
+                </Modal>
             </div>
         </div>
-    )
+    );
 }
 
 export default Products;

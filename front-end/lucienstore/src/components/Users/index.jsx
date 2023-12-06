@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DashboardHeader from '../DashboardHeader';
-import { calculateRange, sliceData } from '../../utils/table-pagination';
+import { calculateRange } from '../../utils/table-pagination';
 import './styles.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
 import EditIcon from '../../assets/icons/icons8-edit.svg';
 import DeleteIcon from '../../assets/icons/icons8-delete.svg';
@@ -52,18 +54,15 @@ function Users() {
 
     const handleChangePage = (newPage) => {
         setPage(newPage);
-        // Instead of setting users again here, you should handle pagination in the rendering part.
     };
 
 
     const openEditModal = (userId) => {
-        // Find the user with the corresponding userId
         const selectedUser = users.find(user => user.id === userId);
 
-        // Open the edit modal and set the initial user data
         setSelectedUserId(userId);
         setEditModalIsOpen(true);
-        setInitialUserData(selectedUser); // Add this line if you need to manage initial data state
+        setInitialUserData(selectedUser);
     };
 
     const closeEditModal = () => {
@@ -84,8 +83,12 @@ function Users() {
             await axios.put(`http://localhost:8080/api/v1/users/${selectedUserId}`, updatedUserData);
             fetchData();
             closeEditModal();
+
+            toast.success('User updated successfully');
         } catch (error) {
             console.error('Error updating user:', error);
+
+            toast.error('Error updating user');
         }
     };
 
@@ -93,8 +96,12 @@ function Users() {
         try {
             await axios.delete(`http://localhost:8080/api/v1/users/${userId}`);
             fetchData();
+
+            toast.success('User deleted successfully');
         } catch (error) {
             console.error('Error deleting user:', error);
+
+            toast.error('Error deleting user');
         }
     };
 
@@ -103,8 +110,12 @@ function Users() {
             await axios.post('http://localhost:8080/api/v1/users', newUserData);
             fetchData();
             closeCreateModal();
+
+            toast.success('User created successfully');
         } catch (error) {
             console.error('Error creating user:', error);
+
+            toast.error('Error creating user');
         }
     };
 
@@ -113,7 +124,8 @@ function Users() {
 
     return (
         <div className='dashboard-content'>
-            <DashboardHeader btnText="New User" />
+            <DashboardHeader btnText="New User" onClick={() => openCreateModal()} />
+
 
             <div className='dashboard-content-container'>
                 <div className='dashboard-content-header'>
@@ -136,7 +148,6 @@ function Users() {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Actions</th>
-                            {/* Add other columns as needed */}
                         </tr>
                     </thead>
 
@@ -170,11 +181,9 @@ function Users() {
                                                 />
                                             </div>
                                         </td>
-                                        {/* Add other columns as needed */}
                                     </tr>
                                     <tr>
-                                        <td colSpan="3"> {/* Adjust the colspan based on the number of columns */}
-                                            {/* Leave it empty if there are no additional details */}
+                                        <td colSpan="3">
                                         </td>
                                     </tr>
                                 </React.Fragment>
@@ -199,24 +208,37 @@ function Users() {
                         <span className='empty-table'>No data</span>
                     </div>
                 )}
-                {/* Edit User Modal */}
                 <Modal
                     isOpen={editModalIsOpen}
                     onRequestClose={closeEditModal}
                     contentLabel='Edit User Modal'
+                    style={{
+                        content: {
+                            backgroundColor: '#DCDCDC',
+                            maxWidth: '400px',
+                            margin: 'auto',
+                        },
+                    }}
                 >
                     <EditUserForm
                         onSubmit={handleEditUser}
                         onCancel={closeEditModal}
-                        initialData={initialUserData} // Pass the initial user data here
+                        initialData={initialUserData}
+
                     />
                 </Modal>
 
-                {/* Create User Modal */}
                 <Modal
                     isOpen={createModalIsOpen}
                     onRequestClose={closeCreateModal}
                     contentLabel='Create User Modal'
+                    style={{
+                        content: {
+                            backgroundColor: '#DCDCDC',
+                            maxWidth: '400px',
+                            margin: 'auto',
+                        },
+                    }}
                 >
                     <CreateUserForm
                         onSubmit={handleCreateUser}
