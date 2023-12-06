@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import SideBarItem from './sidebar-item';
-
 import './styles.css';
 import logo from '../../assets/images/lucienstore-logo.png';
 import LogoutIcon from '../../assets/icons/logout.svg';
