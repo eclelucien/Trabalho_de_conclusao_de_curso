@@ -1,51 +1,131 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import DashboardHeader from '../DashboardHeader';
-
-import all_orders from '../constants/orders';
-import { calculateRange, sliceData } from '../../utils/table-pagination';
-
+import { calculateRange } from '../../utils/table-pagination';
 import './styles.css';
-import DoneIcon from '../../assets/icons/done.svg';
-import CancelIcon from '../../assets/icons/cancel.svg';
-import RefundedIcon from '../../assets/icons/refunded.svg';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Modal from 'react-modal';
+import EditIcon from '../../assets/icons/icons8-edit.svg';
+import DeleteIcon from '../../assets/icons/icons8-delete.svg';
+import EditCategorieForm from './EditCategorieForm';
+import CreateCategorieForm from './CreateCategorieForm';
+
+Modal.setAppElement('#root');
+
 
 function Categories() {
     const [search, setSearch] = useState('');
-    const [orders, setOrders] = useState(all_orders);
+    const [categories, setCategories] = useState([]);
     const [page, setPage] = useState(1);
     const [pagination, setPagination] = useState([]);
+    const [selectedCategorieId, setSelectedCategorieId] = useState(null);
+    const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+    const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
+    const [initialCategorieData, setInitialCategorieData] = useState(null);
+
 
     useEffect(() => {
-        setPagination(calculateRange(all_orders, 5));
-        setOrders(sliceData(all_orders, page, 5));
+        fetchData();
     }, []);
 
-    // Search
-    const __handleSearch = (event) => {
-        setSearch(event.target.value);
-        if (event.target.value !== '') {
-            let search_results = orders.filter((item) =>
-                item.first_name.toLowerCase().includes(search.toLowerCase()) ||
-                item.last_name.toLowerCase().includes(search.toLowerCase()) ||
-                item.product.toLowerCase().includes(search.toLowerCase())
-            );
-            setOrders(search_results);
-        }
-        else {
-            __handleChangePage(1);
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/v1/categories');
+            setCategories(response.data);
+            setPagination(calculateRange(response.data, 5));
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
     };
 
-    // Change Page 
-    const __handleChangePage = (new_page) => {
-        setPage(new_page);
-        setOrders(sliceData(all_orders, new_page, 5));
-    }
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+        if (event.target.value !== '') {
+            let searchResults = categories.filter((categorie) =>
+                categorie.name.toLowerCase().includes(search.toLowerCase()) ||
+                categorie.email.toLowerCase().includes(search.toLowerCase())
+            );
+            setCategories(searchResults);
+        } else {
+            handleChangePage(1);
+        }
+    };
+
+    const handleChangePage = (newPage) => {
+        setPage(newPage);
+    };
+
+
+    const openEditModal = (categorieId) => {
+        const selectedCategorie = categories.find(categorie => categorie.id === categorieId);
+
+        setSelectedCategorieId(categorieId);
+        setEditModalIsOpen(true);
+        setInitialCategorieData(selectedCategorie);
+    };
+
+    const closeEditModal = () => {
+        setEditModalIsOpen(false);
+        setSelectedCategorieId(null);
+    };
+
+    const openCreateModal = () => {
+        setCreateModalIsOpen(true);
+    };
+
+    const closeCreateModal = () => {
+        setCreateModalIsOpen(false);
+    };
+
+    const handleEditCategorie = async (updatedCategorieData) => {
+        try {
+            await axios.put(`http://localhost:8080/api/v1/categories/${selectedCategorieId}`, updatedCategorieData);
+            fetchData();
+            closeEditModal();
+
+            toast.success('Categorie updated successfully');
+        } catch (error) {
+            console.error('Error updating categorie:', error);
+
+            toast.error('Error updating categorie');
+        }
+    };
+
+    const handleDeleteCategorie = async (categorieId) => {
+        try {
+            await axios.delete(`http://localhost:8080/api/v1/categories/${categorieId}`);
+            fetchData();
+
+            toast.success('Categorie deleted successfully');
+        } catch (error) {
+            console.error('Error deleting categorie:', error);
+
+            toast.error('Error deleting categorie');
+        }
+    };
+
+    const handleCreateCategorie = async (newCategorieData) => {
+        try {
+            await axios.post('http://localhost:8080/api/v1/categories', newCategorieData);
+            fetchData();
+            closeCreateModal();
+
+            toast.success('Categorie created successfully');
+        } catch (error) {
+            console.error('Error creating categorie:', error);
+
+            toast.error('Error creating categorie');
+        }
+    };
+
+
+
 
     return (
         <div className='dashboard-content'>
-            <DashboardHeader
-                btnText="New Categorie" />
+            <DashboardHeader btnText="New Categorie" onClick={() => openCreateModal()} />
+
 
             <div className='dashboard-content-container'>
                 <div className='dashboard-content-header'>
@@ -56,83 +136,118 @@ function Categories() {
                             value={search}
                             placeholder='Search..'
                             className='dashboard-content-input'
-                            onChange={e => __handleSearch(e)} />
+                            onChange={(e) => handleSearch(e)}
+                        />
                     </div>
                 </div>
 
                 <table>
                     <thead>
-                        <th>ID</th>
-                        <th>DATE</th>
-                        <th>STATUS</th>
-                        <th>COSTUMER</th>
-                        <th>PRODUCT</th>
-                        <th>REVENUE</th>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
 
-                    {orders.length !== 0 ?
+                    {categories.length !== 0 ? (
                         <tbody>
-                            {orders.map((order, index) => (
-                                <tr key={index}>
-                                    <td><span>{order.id}</span></td>
-                                    <td><span>{order.date}</span></td>
-                                    <td>
-                                        <div>
-                                            {order.status === 'Paid' ?
+                            {categories.map((categorie, index) => (
+                                <React.Fragment key={index}>
+                                    <tr>
+                                        <td>
+                                            <span>{categorie.id}</span>
+                                        </td>
+                                        <td>
+                                            <span>{categorie.name}</span>
+                                        </td>
+                                        <td>
+                                            <span>{categorie.image}</span>
+                                        </td>
+                                        <td>
+                                            <div>
                                                 <img
-                                                    src={DoneIcon}
-                                                    alt='paid-icon'
-                                                    className='dashboard-content-icon' />
-                                                : order.status === 'Canceled' ?
-                                                    <img
-                                                        src={CancelIcon}
-                                                        alt='canceled-icon'
-                                                        className='dashboard-content-icon' />
-                                                    : order.status === 'Refunded' ?
-                                                        <img
-                                                            src={RefundedIcon}
-                                                            alt='refunded-icon'
-                                                            className='dashboard-content-icon' />
-                                                        : null}
-                                            <span>{order.status}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <img
-                                                src={order.avatar}
-                                                className='dashboard-content-avatar'
-                                                alt={order.first_name + ' ' + order.last_name} />
-                                            <span>{order.first_name} {order.last_name}</span>
-                                        </div>
-                                    </td>
-                                    <td><span>{order.product}</span></td>
-                                    <td><span>${order.price}</span></td>
-                                </tr>
+                                                    src={EditIcon}
+                                                    alt='edit-icon'
+                                                    className='dashboard-content-icon'
+                                                    onClick={() => openEditModal(categorie.id)}
+                                                />
+                                                <img
+                                                    src={DeleteIcon}
+                                                    alt='delete-icon'
+                                                    className='dashboard-content-icon'
+                                                    onClick={() => handleDeleteCategorie(categorie.id)}
+                                                />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="3">
+                                        </td>
+                                    </tr>
+                                </React.Fragment>
                             ))}
                         </tbody>
-                        : null}
+                    ) : null}
                 </table>
-
-                {orders.length !== 0 ?
+                {categories.length !== 0 ? (
                     <div className='dashboard-content-footer'>
                         {pagination.map((item, index) => (
                             <span
                                 key={index}
                                 className={item === page ? 'active-pagination' : 'pagination'}
-                                onClick={() => __handleChangePage(item)}>
+                                onClick={() => handleChangePage(item)}
+                            >
                                 {item}
                             </span>
                         ))}
                     </div>
-                    :
+                ) : (
                     <div className='dashboard-content-footer'>
                         <span className='empty-table'>No data</span>
                     </div>
-                }
+                )}
+                <Modal
+                    isOpen={editModalIsOpen}
+                    onRequestClose={closeEditModal}
+                    contentLabel='Edit Categorie Modal'
+                    style={{
+                        content: {
+                            backgroundColor: '#DCDCDC',
+                            maxWidth: '400px',
+                            margin: 'auto',
+                        },
+                    }}
+                >
+                    <EditCategorieForm
+                        onSubmit={handleEditCategorie}
+                        onCancel={closeEditModal}
+                        initialData={initialCategorieData}
+
+                    />
+                </Modal>
+
+                <Modal
+                    isOpen={createModalIsOpen}
+                    onRequestClose={closeCreateModal}
+                    contentLabel='Create Categorie Modal'
+                    style={{
+                        content: {
+                            backgroundColor: '#DCDCDC',
+                            maxWidth: '400px',
+                            margin: 'auto',
+                        },
+                    }}
+                >
+                    <CreateCategorieForm
+                        onSubmit={handleCreateCategorie}
+                        onCancel={closeCreateModal}
+                    />
+                </Modal>
             </div>
         </div>
-    )
+    );
 }
 
 export default Categories;
