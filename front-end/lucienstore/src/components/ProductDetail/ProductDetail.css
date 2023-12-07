@@ -1,3 +1,9 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .product-detail {
     display: flex;
     justify-content: center;
@@ -42,4 +48,225 @@ a {
 
 a:hover {
     background-color: #0056b3;
+}
+
+
+
+/* styles.css */
+:root {
+    --gold: #fde047;
+}
+
+/* Additional CSS rules for styling your React components */
+
+@layer base {
+    button {
+        @apply border border-black rounded-xl px-5 py-1;
+    }
+}
+
+.react-rater-star.is-active-half:before,
+.react-rater-star.is-active {
+    color: var(--gold) !important;
+}
+
+/* Separate CSS for Product Information Section */
+
+/* Container styles */
+.product-info-container {
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Title styles */
+.product-title {
+    padding-top: 0rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Rating styles */
+.rating-container {
+    margin-top: 0rem;
+    display: flex;
+    align-items: center;
+}
+
+.rating {
+    font-size: 0rem;
+}
+
+.review-count {
+    margin-left: 0.25rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Availability styles */
+.availability {
+    margin-top: 0rem;
+    font-weight: bold;
+}
+
+.in-stock {
+    color: green;
+}
+
+.expired {
+    color: red;
+}
+
+/* Other details styles */
+.product-detail {
+    margin-top: 0rem;
+    font-weight: bold;
+}
+
+.product-details-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0rem;
+}
+
+.product-details-row .product-detail {
+    margin: 0;
+    /* Remove default margin */
+}
+
+.product-details-row .product-detail:not(:last-child) {
+    border-right: 1px solid #666;
+    /* Add border between details */
+    padding-right: 1rem;
+    /* Add padding between details */
+}
+
+.product-detail span {
+    font-weight: normal;
+}
+
+/* Price styles */
+.price {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #8a2be2;
+    /* Violet color */
+}
+
+.discount-price {
+    font-size: 0.75rem;
+    color: #666;
+    text-decoration: line-through;
+}
+
+/* Description styles */
+.description {
+    padding-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #666;
+}
+
+/* Size, Color, Quantity styles */
+.options-container {
+    margin-top: 1rem;
+}
+
+.options-title {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.options-list {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.color-option {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+/* Quantity styles */
+.quantity-container {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Quantity buttons row styles */
+.quantity-buttons-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.quantity-btn {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #0056b3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-display {
+    width: 2rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
+
+
+.quantity-btn {
+    width: 2rem;
+    height: 1rem;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add to Cart and Wishlist button styles */
+.buttons-container {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.button {
+    width: 23.33%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-to-cart {
+    background-color: #2f9b14;
+    border: none;
+    /* Violet color */
+    color: #fff;
+}
+
+.wishlist {
+    background-color: #0004ff;
+    border: none;
+
+    /* Amber color */
+    color: #fff;
 }
