@@ -1,36 +1,15 @@
 package com.eclesiastelucien.com.lucienstore.modules.category;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.eclesiastelucien.com.lucienstore.commons.dtos.ApiResponse;
-import com.eclesiastelucien.com.lucienstore.commons.utils.Utils;
-import com.eclesiastelucien.com.lucienstore.modules.category.dtos.requests.CategoryRequest;
-import com.eclesiastelucien.com.lucienstore.modules.category.dtos.responses.CategoryResponse;
 import com.eclesiastelucien.com.lucienstore.modules.category.models.Category;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 
 @Tag(name = "categories", description = "CRUD REST APIs - Create Category, Update Category, Get User, Get All categories, Delete Category")
 @RestController
@@ -41,42 +20,33 @@ public class CategoryController {
     private CategoryServiceImpl categoryServiceImpl;
 
     @SecurityRequirement(name = "bearerAuth")
-    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<ApiResponse> create(@RequestPart("categoryRequest") String categoryJson,
-            @NotNull @RequestPart("file") MultipartFile file) throws IOException {
-        this.categoryServiceImpl.create(Utils.parseJson(categoryJson, CategoryRequest.class), file);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Category created"), HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<ApiResponse> create(@RequestParam String name) {
+        this.categoryServiceImpl.create(name);
+        return new ResponseEntity<>(new ApiResponse(true, "Category created"), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> findAll(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "limit", defaultValue = "30") int limit) {
-        List<Category> categories = this.categoryServiceImpl.findAll(page, limit);
-        List<CategoryResponse> categoryResponse = categories.stream().map(CategoryResponse::new)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
+    public ResponseEntity<Iterable<Category>> findAll() {
+        return new ResponseEntity<>(this.categoryServiceImpl.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryResponse> findOneById(@PathVariable @Min(1) Long categoryId) {
-        CategoryResponse categoryResponse = new CategoryResponse(this.categoryServiceImpl.findById(categoryId));
-        return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
+    public ResponseEntity<Category> findOneById(@PathVariable @Min(1) Long categoryId) {
+        return new ResponseEntity<>(this.categoryServiceImpl.findById(categoryId), HttpStatus.OK);
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{categoryId}")
-    public ResponseEntity<ApiResponse> update(@PathVariable @Min(1) Long categoryId,
-            @RequestBody CategoryRequest categoryRequestDto) {
-        this.categoryServiceImpl.update(categoryId, categoryRequestDto);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Category updated"), HttpStatus.CREATED);
-
+    public ResponseEntity<ApiResponse> update(@PathVariable @Min(1) Long categoryId, @RequestParam String name) {
+        this.categoryServiceImpl.update(categoryId, name);
+        return new ResponseEntity<>(new ApiResponse(true, "Category updated"), HttpStatus.CREATED);
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<ApiResponse> delete(@PathVariable @Min(1) Long categoryId) {
         this.categoryServiceImpl.remove(categoryId);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Category deleted"), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ApiResponse(true, "Category deleted"), HttpStatus.CREATED);
     }
 }

@@ -10,6 +10,8 @@ import com.eclesiastelucien.com.lucienstore.modules.product.dtos.ProductRequest;
 import com.eclesiastelucien.com.lucienstore.modules.product.dtos.ProductSearchResponse;
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Product;
 
+import jakarta.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +49,7 @@ public class ProductService {
         return promotedProducts;
     }
 
+    @Transactional
     public Product createProduct(ProductRequest productRequest) {
         Product product = new Product();
         product.setName(productRequest.getName());

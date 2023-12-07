@@ -10,6 +10,4 @@ public class CategoryRequest {
 
     @NotNull(message = "name cannot be null")
     private String name;
-    @NotNull(message = "tags cannot be null")
-    private List<String> tags;
 }

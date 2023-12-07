@@ -21,18 +21,6 @@ spring:
       max-file-size: 2MB
       max-request-size: 2MB
 
-  mail:
-    host: sandbox.smtp.mailtrap.io
-    port: 2525
-    username: 4b59dfd8844f52
-    password: 627b0dc4a1cdc7
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
   devtools:
     restart:
       enabled: true

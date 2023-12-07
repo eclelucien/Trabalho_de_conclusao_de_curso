@@ -1,20 +1,17 @@
 package com.eclesiastelucien.com.lucienstore.modules.category;
 
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import com.eclesiastelucien.com.lucienstore.modules.category.dtos.requests.CategoryRequest;
 import com.eclesiastelucien.com.lucienstore.modules.category.models.Category;
 
+import java.util.List;
+
 public interface CategoryService {
-    public void create(CategoryRequest categoryRequest, MultipartFile file);
+    void create(String name);
 
-    public List<Category> findAll(int page, int limit);
+    List<Category> findAll();
 
-    public Category findById(Long id);
+    Category findById(Long id);
 
-    public void update(Long id, CategoryRequest categoryRequest);
+    void update(Long id, String name);
 
-    public void remove(Long id);
+    void remove(Long id);
 }

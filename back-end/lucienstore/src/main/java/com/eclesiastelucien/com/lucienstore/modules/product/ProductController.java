@@ -12,6 +12,8 @@ import com.eclesiastelucien.com.lucienstore.modules.product.dtos.ProductSearchRe
 import com.eclesiastelucien.com.lucienstore.modules.product.models.Product;
 
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "products", description = "CRUD REST APIs - Create Product, Update Product, Get Product, Get All products, Delete Product")
@@ -45,6 +47,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
         Product createdProduct = productService.createProduct(productRequest);
 

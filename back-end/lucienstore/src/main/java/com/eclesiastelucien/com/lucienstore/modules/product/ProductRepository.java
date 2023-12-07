@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             +
             "FROM products as prod " +
             "LEFT JOIN categories as cat ON prod.category_id = cat.id " +
-            "WHERE (prod.name LIKE %:searchTerm% OR cat.name LIKE %:searchTerm% " +
-            "OR EXISTS (SELECT 1 FROM jsonb_array_elements_text(cat.tags) AS t WHERE t LIKE %:searchTerm%))", nativeQuery = true)
+            "WHERE (prod.name LIKE %:searchTerm% OR cat.name LIKE %:searchTerm%)", nativeQuery = true)
     List<Object[]> searchProducts(@Param("searchTerm") String searchTerm);
+
 }

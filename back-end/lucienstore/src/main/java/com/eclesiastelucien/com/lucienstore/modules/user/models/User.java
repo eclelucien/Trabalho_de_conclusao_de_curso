@@ -6,8 +6,6 @@ import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +15,7 @@ import com.eclesiastelucien.com.lucienstore.commons.models.Token;
 import com.eclesiastelucien.com.lucienstore.modules.order.models.Order;
 import com.eclesiastelucien.com.lucienstore.modules.user.enums.UserRoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
@@ -52,11 +51,10 @@ public class User extends AbstractEntity implements UserDetails {
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.REMOVE)
     private List<Order> orders = new ArrayList<>();
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // In this example, we'll assign a simple role to all users. You can adjust this
-        // as per your role system.
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(this.getRole().name()));
     }
 
     @JsonIgnore
@@ -123,6 +121,13 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     public UserRoleEnum getRole() {
+        if (this instanceof Administrator) {
+            return UserRoleEnum.ADMINISTRATOR;
+        }
+        return UserRoleEnum.BUYER;
+    }
+
+    public UserRoleEnum setRole() {
         if (this instanceof Administrator) {
             return UserRoleEnum.ADMINISTRATOR;
         }
