@@ -61,25 +61,25 @@ const ProductDetail = () => {
 
 
     return (
-        <section
+        <div
             style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 1fr', // Two equal columns
-                gap: '20px', // Adjust the gap based on your design
-                margin: 'auto',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '20px',
+                margin: '',
                 maxWidth: '1200px',
-                borderBottom: '1px solid #000',
                 paddingBottom: '5px',
+                height: '100%',
                 paddingTop: '5px',
             }}
         >
-            <div style={{ margin: 'auto', paddingLeft: '4px', paddingRight: '4px', height: '400px' }}>
+            <div style={{ margin: '', paddingLeft: '4px', paddingRight: '4px', height: '100%' }}>
                 <ReactImageGallery
                     showBullets={false}
                     showFullscreenButton={false}
                     showPlayButton={false}
                     items={productDetailItem.images}
-
+                    style={{ maxHeight: '350px' }}
                 />
             </div>
 
@@ -163,7 +163,7 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-        </section>
+        </div>
     );
 };
 

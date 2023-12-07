@@ -17,14 +17,6 @@
     text-align: left;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    max-height: 400px;
-}
 
 h2 {
     color: #333;
@@ -35,16 +27,7 @@ p {
     color: #666;
 }
 
-a {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
+
 
 a:hover {
     background-color: #0056b3;
@@ -52,27 +35,16 @@ a:hover {
 
 
 
-/* styles.css */
-:root {
-    --gold: #fde047;
-}
-
 /* Additional CSS rules for styling your React components */
 
-@layer base {
-    button {
-        @apply border border-black rounded-xl px-5 py-1;
-    }
-}
+
 
 .react-rater-star.is-active-half:before,
 .react-rater-star.is-active {
     color: var(--gold) !important;
 }
 
-/* Separate CSS for Product Information Section */
 
-/* Container styles */
 .product-info-container {
     padding: 0 1rem;
     height: 100%;
@@ -81,14 +53,12 @@ a:hover {
     justify-content: center;
 }
 
-/* Title styles */
 .product-title {
     padding-top: 0rem;
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-/* Rating styles */
 .rating-container {
     margin-top: 0rem;
     display: flex;
@@ -105,7 +75,6 @@ a:hover {
     color: #666;
 }
 
-/* Availability styles */
 .availability {
     margin-top: 0rem;
     font-weight: bold;
@@ -119,7 +88,6 @@ a:hover {
     color: red;
 }
 
-/* Other details styles */
 .product-detail {
     margin-top: 0rem;
     font-weight: bold;
@@ -133,27 +101,22 @@ a:hover {
 
 .product-details-row .product-detail {
     margin: 0;
-    /* Remove default margin */
 }
 
 .product-details-row .product-detail:not(:last-child) {
     border-right: 1px solid #666;
-    /* Add border between details */
     padding-right: 1rem;
-    /* Add padding between details */
 }
 
 .product-detail span {
     font-weight: normal;
 }
 
-/* Price styles */
 .price {
     margin-top: 1rem;
     font-size: 2rem;
     font-weight: bold;
     color: #8a2be2;
-    /* Violet color */
 }
 
 .discount-price {
@@ -162,7 +125,6 @@ a:hover {
     text-decoration: line-through;
 }
 
-/* Description styles */
 .description {
     padding-top: 1rem;
     font-size: 0.875rem;
@@ -170,7 +132,6 @@ a:hover {
     color: #666;
 }
 
-/* Size, Color, Quantity styles */
 .options-container {
     margin-top: 1rem;
 }
@@ -193,7 +154,6 @@ a:hover {
     border: 2px solid #fff;
 }
 
-/* Quantity styles */
 .quantity-container {
     margin-top: 1.5rem;
     display: flex;
@@ -201,7 +161,6 @@ a:hover {
 }
 
 
-/* Quantity buttons row styles */
 .quantity-buttons-row {
     display: flex;
     gap: 1rem;
@@ -240,7 +199,6 @@ a:hover {
     justify-content: center;
 }
 
-/* Add to Cart and Wishlist button styles */
 .buttons-container {
     margin-top: 0.5rem;
     display: flex;
@@ -259,7 +217,6 @@ a:hover {
 .add-to-cart {
     background-color: #2f9b14;
     border: none;
-    /* Violet color */
     color: #fff;
 }
 
@@ -267,6 +224,5 @@ a:hover {
     background-color: #0004ff;
     border: none;
 
-    /* Amber color */
     color: #fff;
 }
