@@ -34,16 +34,21 @@ import java.util.List;
 @Table(name = "products")
 public class Product extends AbstractEntity {
 
-    private @NotNull String name;
-    private @NotNull String description;
-    private @NotNull Double price;
-    private List<String> images;
-    private @NotNull int availableAmount;
-    private int soldAmount;
+    @NotNull
+    private String name;
 
-    @JsonIgnore
-    @ManyToOne
-    private User seller;
+    @NotNull
+    private String description;
+
+    @NotNull
+    private Double price;
+
+    private List<String> images;
+
+    @NotNull
+    private int availableAmount;
+
+    private int soldAmount;
 
     @ManyToOne
     private Category category;
@@ -51,7 +56,8 @@ public class Product extends AbstractEntity {
     private String currency;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private @NotNull Discount discount;
+    @NotNull
+    private Discount discount;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private List<Property> properties;

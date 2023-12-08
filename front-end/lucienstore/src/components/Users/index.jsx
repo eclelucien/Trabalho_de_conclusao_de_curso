@@ -10,6 +10,7 @@ import EditIcon from '../../assets/icons/icons8-edit.svg';
 import DeleteIcon from '../../assets/icons/icons8-delete.svg';
 import EditUserForm from './EditUserForm';
 import CreateUserForm from './CreateUserForm';
+import Layout from '../Layout/Layout';
 
 Modal.setAppElement('#root');
 
@@ -123,130 +124,132 @@ function Users() {
 
 
     return (
-        <div className='dashboard-content'>
-            <DashboardHeader btnText="New User" onClick={() => openCreateModal()} />
+        <Layout>
+            <div className='dashboard-content'>
+                <DashboardHeader btnText="New User" onClick={() => openCreateModal()} />
 
 
-            <div className='dashboard-content-container'>
-                <div className='dashboard-content-header'>
-                    <h2>Users List</h2>
-                    <div className='dashboard-content-search'>
-                        <input
-                            type='text'
-                            value={search}
-                            placeholder='Search..'
-                            className='dashboard-content-input'
-                            onChange={(e) => handleSearch(e)}
-                        />
+                <div className='dashboard-content-container'>
+                    <div className='dashboard-content-header'>
+                        <h2>Users List</h2>
+                        <div className='dashboard-content-search'>
+                            <input
+                                type='text'
+                                value={search}
+                                placeholder='Search..'
+                                className='dashboard-content-input'
+                                onChange={(e) => handleSearch(e)}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
 
+                        {users.length !== 0 ? (
+                            <tbody>
+                                {users.map((user, index) => (
+                                    <React.Fragment key={index}>
+                                        <tr>
+                                            <td>
+                                                <span>{user.id}</span>
+                                            </td>
+                                            <td>
+                                                <span>{user.name}</span>
+                                            </td>
+                                            <td>
+                                                <span>{user.email}</span>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img
+                                                        src={EditIcon}
+                                                        alt='edit-icon'
+                                                        className='dashboard-content-icon'
+                                                        onClick={() => openEditModal(user.id)}
+                                                    />
+                                                    <img
+                                                        src={DeleteIcon}
+                                                        alt='delete-icon'
+                                                        className='dashboard-content-icon'
+                                                        onClick={() => handleDeleteUser(user.id)}
+                                                    />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="3">
+                                            </td>
+                                        </tr>
+                                    </React.Fragment>
+                                ))}
+                            </tbody>
+                        ) : null}
+                    </table>
                     {users.length !== 0 ? (
-                        <tbody>
-                            {users.map((user, index) => (
-                                <React.Fragment key={index}>
-                                    <tr>
-                                        <td>
-                                            <span>{user.id}</span>
-                                        </td>
-                                        <td>
-                                            <span>{user.name}</span>
-                                        </td>
-                                        <td>
-                                            <span>{user.email}</span>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <img
-                                                    src={EditIcon}
-                                                    alt='edit-icon'
-                                                    className='dashboard-content-icon'
-                                                    onClick={() => openEditModal(user.id)}
-                                                />
-                                                <img
-                                                    src={DeleteIcon}
-                                                    alt='delete-icon'
-                                                    className='dashboard-content-icon'
-                                                    onClick={() => handleDeleteUser(user.id)}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan="3">
-                                        </td>
-                                    </tr>
-                                </React.Fragment>
+                        <div className='dashboard-content-footer'>
+                            {pagination.map((item, index) => (
+                                <span
+                                    key={index}
+                                    className={item === page ? 'active-pagination' : 'pagination'}
+                                    onClick={() => handleChangePage(item)}
+                                >
+                                    {item}
+                                </span>
                             ))}
-                        </tbody>
-                    ) : null}
-                </table>
-                {users.length !== 0 ? (
-                    <div className='dashboard-content-footer'>
-                        {pagination.map((item, index) => (
-                            <span
-                                key={index}
-                                className={item === page ? 'active-pagination' : 'pagination'}
-                                onClick={() => handleChangePage(item)}
-                            >
-                                {item}
-                            </span>
-                        ))}
-                    </div>
-                ) : (
-                    <div className='dashboard-content-footer'>
-                        <span className='empty-table'>No data</span>
-                    </div>
-                )}
-                <Modal
-                    isOpen={editModalIsOpen}
-                    onRequestClose={closeEditModal}
-                    contentLabel='Edit User Modal'
-                    style={{
-                        content: {
-                            backgroundColor: '#DCDCDC',
-                            maxWidth: '400px',
-                            margin: 'auto',
-                        },
-                    }}
-                >
-                    <EditUserForm
-                        onSubmit={handleEditUser}
-                        onCancel={closeEditModal}
-                        initialData={initialUserData}
+                        </div>
+                    ) : (
+                        <div className='dashboard-content-footer'>
+                            <span className='empty-table'>No data</span>
+                        </div>
+                    )}
+                    <Modal
+                        isOpen={editModalIsOpen}
+                        onRequestClose={closeEditModal}
+                        contentLabel='Edit User Modal'
+                        style={{
+                            content: {
+                                backgroundColor: '#DCDCDC',
+                                maxWidth: '400px',
+                                margin: 'auto',
+                            },
+                        }}
+                    >
+                        <EditUserForm
+                            onSubmit={handleEditUser}
+                            onCancel={closeEditModal}
+                            initialData={initialUserData}
 
-                    />
-                </Modal>
+                        />
+                    </Modal>
 
-                <Modal
-                    isOpen={createModalIsOpen}
-                    onRequestClose={closeCreateModal}
-                    contentLabel='Create User Modal'
-                    style={{
-                        content: {
-                            backgroundColor: '#DCDCDC',
-                            maxWidth: '400px',
-                            margin: 'auto',
-                        },
-                    }}
-                >
-                    <CreateUserForm
-                        onSubmit={handleCreateUser}
-                        onCancel={closeCreateModal}
-                    />
-                </Modal>
+                    <Modal
+                        isOpen={createModalIsOpen}
+                        onRequestClose={closeCreateModal}
+                        contentLabel='Create User Modal'
+                        style={{
+                            content: {
+                                backgroundColor: '#DCDCDC',
+                                maxWidth: '400px',
+                                margin: 'auto',
+                            },
+                        }}
+                    >
+                        <CreateUserForm
+                            onSubmit={handleCreateUser}
+                            onCancel={closeCreateModal}
+                        />
+                    </Modal>
+                </div>
             </div>
-        </div>
+        </Layout>
     );
 }
 

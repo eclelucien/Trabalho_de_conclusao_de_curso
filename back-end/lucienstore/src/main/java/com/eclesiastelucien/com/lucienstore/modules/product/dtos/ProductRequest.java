@@ -7,19 +7,31 @@ import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+// ProductRequest DTO
 @Getter
 public class ProductRequest {
 
-    private @NotNull Long categoryId;
-    private @NotNull String name;
-    private @NotNull String description;
-    private @NotNull Double price;
-    private @NotNull int availableAmount;
+    @NotNull
+    private Long categoryId;
 
-    private @NotNull boolean useDefaultCurrency;
+    @NotNull
+    private String name;
+
+    @NotNull
+    private String description;
+
+    @NotNull
+    private Double price;
+
+    @NotNull
+    private int availableAmount;
+
+    @NotNull
+    private boolean useDefaultCurrency;
 
     private List<String> images;
 
+    @NotNull
     private Discount discount;
 
     private List<Property> properties;

@@ -10,6 +10,7 @@ import EditIcon from '../../assets/icons/icons8-edit.svg';
 import DeleteIcon from '../../assets/icons/icons8-delete.svg';
 import EditCategorieForm from './EditCategorieForm';
 import CreateCategorieForm from './CreateCategorieForm';
+import Layout from '../Layout/Layout';
 
 Modal.setAppElement('#root');
 
@@ -123,130 +124,132 @@ function Categories() {
 
 
     return (
-        <div className='dashboard-content'>
-            <DashboardHeader btnText="New Categorie" onClick={() => openCreateModal()} />
+        <Layout>
+            <div className='dashboard-content'>
+                <DashboardHeader btnText="New Categorie" onClick={() => openCreateModal()} />
 
 
-            <div className='dashboard-content-container'>
-                <div className='dashboard-content-header'>
-                    <h2>Categories List</h2>
-                    <div className='dashboard-content-search'>
-                        <input
-                            type='text'
-                            value={search}
-                            placeholder='Search..'
-                            className='dashboard-content-input'
-                            onChange={(e) => handleSearch(e)}
-                        />
+                <div className='dashboard-content-container'>
+                    <div className='dashboard-content-header'>
+                        <h2>Categories List</h2>
+                        <div className='dashboard-content-search'>
+                            <input
+                                type='text'
+                                value={search}
+                                placeholder='Search..'
+                                className='dashboard-content-input'
+                                onChange={(e) => handleSearch(e)}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
 
+                        {categories.length !== 0 ? (
+                            <tbody>
+                                {categories.map((categorie, index) => (
+                                    <React.Fragment key={index}>
+                                        <tr>
+                                            <td>
+                                                <span>{categorie.id}</span>
+                                            </td>
+                                            <td>
+                                                <span>{categorie.name}</span>
+                                            </td>
+                                            <td>
+                                                <span>{categorie.image}</span>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img
+                                                        src={EditIcon}
+                                                        alt='edit-icon'
+                                                        className='dashboard-content-icon'
+                                                        onClick={() => openEditModal(categorie.id)}
+                                                    />
+                                                    <img
+                                                        src={DeleteIcon}
+                                                        alt='delete-icon'
+                                                        className='dashboard-content-icon'
+                                                        onClick={() => handleDeleteCategorie(categorie.id)}
+                                                    />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="3">
+                                            </td>
+                                        </tr>
+                                    </React.Fragment>
+                                ))}
+                            </tbody>
+                        ) : null}
+                    </table>
                     {categories.length !== 0 ? (
-                        <tbody>
-                            {categories.map((categorie, index) => (
-                                <React.Fragment key={index}>
-                                    <tr>
-                                        <td>
-                                            <span>{categorie.id}</span>
-                                        </td>
-                                        <td>
-                                            <span>{categorie.name}</span>
-                                        </td>
-                                        <td>
-                                            <span>{categorie.image}</span>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <img
-                                                    src={EditIcon}
-                                                    alt='edit-icon'
-                                                    className='dashboard-content-icon'
-                                                    onClick={() => openEditModal(categorie.id)}
-                                                />
-                                                <img
-                                                    src={DeleteIcon}
-                                                    alt='delete-icon'
-                                                    className='dashboard-content-icon'
-                                                    onClick={() => handleDeleteCategorie(categorie.id)}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan="3">
-                                        </td>
-                                    </tr>
-                                </React.Fragment>
+                        <div className='dashboard-content-footer'>
+                            {pagination.map((item, index) => (
+                                <span
+                                    key={index}
+                                    className={item === page ? 'active-pagination' : 'pagination'}
+                                    onClick={() => handleChangePage(item)}
+                                >
+                                    {item}
+                                </span>
                             ))}
-                        </tbody>
-                    ) : null}
-                </table>
-                {categories.length !== 0 ? (
-                    <div className='dashboard-content-footer'>
-                        {pagination.map((item, index) => (
-                            <span
-                                key={index}
-                                className={item === page ? 'active-pagination' : 'pagination'}
-                                onClick={() => handleChangePage(item)}
-                            >
-                                {item}
-                            </span>
-                        ))}
-                    </div>
-                ) : (
-                    <div className='dashboard-content-footer'>
-                        <span className='empty-table'>No data</span>
-                    </div>
-                )}
-                <Modal
-                    isOpen={editModalIsOpen}
-                    onRequestClose={closeEditModal}
-                    contentLabel='Edit Categorie Modal'
-                    style={{
-                        content: {
-                            backgroundColor: '#DCDCDC',
-                            maxWidth: '400px',
-                            margin: 'auto',
-                        },
-                    }}
-                >
-                    <EditCategorieForm
-                        onSubmit={handleEditCategorie}
-                        onCancel={closeEditModal}
-                        initialData={initialCategorieData}
+                        </div>
+                    ) : (
+                        <div className='dashboard-content-footer'>
+                            <span className='empty-table'>No data</span>
+                        </div>
+                    )}
+                    <Modal
+                        isOpen={editModalIsOpen}
+                        onRequestClose={closeEditModal}
+                        contentLabel='Edit Categorie Modal'
+                        style={{
+                            content: {
+                                backgroundColor: '#DCDCDC',
+                                maxWidth: '400px',
+                                margin: 'auto',
+                            },
+                        }}
+                    >
+                        <EditCategorieForm
+                            onSubmit={handleEditCategorie}
+                            onCancel={closeEditModal}
+                            initialData={initialCategorieData}
 
-                    />
-                </Modal>
+                        />
+                    </Modal>
 
-                <Modal
-                    isOpen={createModalIsOpen}
-                    onRequestClose={closeCreateModal}
-                    contentLabel='Create Categorie Modal'
-                    style={{
-                        content: {
-                            backgroundColor: '#DCDCDC',
-                            maxWidth: '400px',
-                            margin: 'auto',
-                        },
-                    }}
-                >
-                    <CreateCategorieForm
-                        onSubmit={handleCreateCategorie}
-                        onCancel={closeCreateModal}
-                    />
-                </Modal>
+                    <Modal
+                        isOpen={createModalIsOpen}
+                        onRequestClose={closeCreateModal}
+                        contentLabel='Create Categorie Modal'
+                        style={{
+                            content: {
+                                backgroundColor: '#DCDCDC',
+                                maxWidth: '400px',
+                                margin: 'auto',
+                            },
+                        }}
+                    >
+                        <CreateCategorieForm
+                            onSubmit={handleCreateCategorie}
+                            onCancel={closeCreateModal}
+                        />
+                    </Modal>
+                </div>
             </div>
-        </div>
+        </Layout>
     );
 }
 

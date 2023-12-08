@@ -16,6 +16,5 @@ public class ProductCartResponse extends ProductResponse {
 
     public ProductCartResponse(Product product) {
         super(product);
-        this.seller = product.getSeller();
     }
 }

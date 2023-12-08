@@ -49,15 +49,28 @@ public class ProductService {
         return promotedProducts;
     }
 
-    @Transactional
     public Product createProduct(ProductRequest productRequest) {
-        Product product = new Product();
-        product.setName(productRequest.getName());
-        product.setDescription(productRequest.getDescription());
-        product.setAvailableAmount(productRequest.getAvailableAmount());
-        product.setImages(productRequest.getImages());
+        try {
+            System.out.println("Teste 11111111");
+            Product product = new Product();
+            System.out.println("Teste 222222");
+            product.setName(productRequest.getName());
+            System.out.println("Teste 3333333");
+            product.setDescription(productRequest.getDescription());
+            System.out.println("Teste 444444444");
+            product.setAvailableAmount(productRequest.getAvailableAmount());
+            System.out.println("Teste 5555555");
+            product.setImages(productRequest.getImages());
+            System.out.println("Teste 6666666");
 
-        return productRepository.save(product);
+            System.out.println(product.toString());
+            Product pro = productRepository.save(product);
+            System.out.println("Teste 77777777777");
+            return pro;
+        } catch (Exception e) {
+            System.out.println(e);
+            return new Product();
+        }
     }
 
     public Product updateProduct(Long id, ProductRequest productRequest) {

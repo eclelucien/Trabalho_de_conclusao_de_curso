@@ -21,9 +21,6 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 
-
-
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -64,9 +61,9 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/shipments/**")
                 .permitAll()
-                .requestMatchers(HttpMethod.GET,  "/api/v1/users")
+                .requestMatchers(HttpMethod.GET, "/api/v1/users")
                 .permitAll()
-                .requestMatchers(HttpMethod.POST,  "/api/v1/users")
+                .requestMatchers(HttpMethod.POST, "/api/v1/users")
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/login")
                 .permitAll()
