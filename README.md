@@ -24,7 +24,7 @@ O Lucien’Store será gerenciado por administradores que serão responsáveis p
 
 ### Conclusão:
 O Lucien’Store é um e-commerce de moda projetado para proporcionar aos usuários uma experiência de compra online inesquecível. Com uma curadoria cuidadosa de produtos, uma interface amigável e recursos de personalização, estamos confiantes de que seremos capazes de atender às necessidades dos amantes da moda em busca de estilo e qualidade. Junte-se a nós nessa jornada para criar um destino online excepcional para a moda contemporânea.
----
+
 
 ## Descrição Detalhada do Projeto: Lucien’Store - Desenvolvimento do E-commerce Fashion
 
