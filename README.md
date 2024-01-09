@@ -33,14 +33,20 @@ O projeto Lucien’Store é um e-commerce fashion que busca revolucionar a forma
 
 ### Tecnologias Utilizadas:
 - Front-End: O front-end será desenvolvido utilizando o React JS, um framework JavaScript popular para a criação de interfaces de usuário dinâmicas e responsivas. Faremos uso de bibliotecas como React Router para gerenciar a navegação e Redux para o gerenciamento do estado da aplicação.
+
 - Back-End: O back-end será desenvolvido em Spring Boot, um framework Java que oferece uma arquitetura ágil e eficiente para a construção de aplicativos web. Utilizaremos o Spring MVC para a criação de APIs RESTful, o Spring Data JPA para acesso ao banco de dados e o Spring Security para garantir a segurança das transações e autenticação dos usuários.
+
 - Banco de Dados: O banco de dados PostgreSQL será utilizado para armazenar os dados do sistema. Faremos uso do mapeamento objeto-relacional fornecido pelo Spring Data JPA para a persistência e recuperação dos dados. Serão criadas tabelas como "usuários", "produtos", "pedidos" e "pagamentos", entre outras, com as colunas necessárias para cada uma delas.
 
 ### Funcionalidades Principais:
 - Autenticação e Autorização: Implementaremos um sistema de autenticação seguro, permitindo que os usuários se cadastrem, façam login e gerenciem suas informações pessoais. Além disso, definiremos diferentes níveis de permissões para garantir que apenas usuários autorizados possam acessar determinadas funcionalidades.
+
 - Catálogo de Produtos: Desenvolveremos uma página de catálogo que exibirá os produtos disponíveis para venda. Os usuários poderão navegar pelas diferentes categorias, filtrar os produtos por preço, tamanho, marca, etc. Também implementaremos uma funcionalidade de busca para facilitar a localização de produtos específicos.
+
 - Carrinho de Compras: Criaremos um carrinho de compras que permitirá aos usuários adicionar produtos, ajustar as quantidades, visualizar o subtotal e finalizar a compra. Também incluiremos a funcionalidade de salvar o carrinho para que os usuários possam retomar a compra em sessões futuras.
+
 - Processamento de Pagamentos: Integraremos um sistema de processamento de pagamentos seguro e confiável para que os usuários possam efetuar transações de compra de forma segura. Utilizaremos uma solução de pagamento como o Stripe, que oferece suporte a diferentes métodos de pagamento.
+
 - Gerenciamento de Pedidos: Implementaremos um painel de administração para que os comerciantes possam gerenciar os pedidos recebidos. Isso incluirá a visualização dos pedidos, atualização do status de entrega e geração de relatórios de vendas.
 
 ### Considerações Finais:
